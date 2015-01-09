@@ -1,0 +1,6 @@
+language: java
+
+before_script: cd ramses_demo
+
+script: "./ramses_demo/build_demo.sh" 
+
