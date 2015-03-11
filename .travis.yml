@@ -1,4 +1,4 @@
 language: java
 
-script: "cd ramses-demo; source ./build_demo.sh; source ./build_test0.sh"
+script: "cd ramses-demo; pushd .; source ./build_demo.sh; popd; source ./build_test0.sh"
 
