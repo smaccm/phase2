@@ -17,20 +17,23 @@ prxBody(model) ::= <<
     <module name="armv7m.vectable">
       <flash_load_addr>0x8000000</flash_load_addr>
       <preemption>true</preemption>
-      <systick>rtos_internal_exception_preempt_trampoline_systick</systick>
+       $writeInterruptHandlers(model)$
     </module>
     <module name="armv7m.semihost-debug" />
     <module name="generic.debug" />
 
     <module name="armv7m.rtos-kochab">
-      <api_asserts>true</api_asserts>
-      <internal_asserts>true</internal_asserts>
-      <fatal_error>fatal</fatal_error>
       <prefix>rtos</prefix>
       <taskid_size>8</taskid_size>
       <signalset_size>8</signalset_size>
-
+      <api_asserts>true</api_asserts>
+      <internal_asserts>true</internal_asserts>
+      <fatal_error>fatal</fatal_error>
+      
       <signal_labels>
+        <signal_label>
+          <name>smaccm_dispatcher</name>
+        </signal_label>
       	$writeSignalLabels(model)$
       </signal_labels>
       
@@ -41,6 +44,21 @@ prxBody(model) ::= <<
       <mutexes>
       	$writeMutexes(model)$
       </mutexes>
+      
+      <semaphores>
+      	$writeSemaphores(model)$
+      </semaphores>
+      
+      <interrupt_events>
+      	$writeInterruptEvents(model)$
+      </interrupt_events>
+
+      <!-- MWW: What is this for?!? -->
+      <mutex>
+        <stats>false</stats>
+      </mutex>
+
+    </module>
   </modules>
 </system>
 
