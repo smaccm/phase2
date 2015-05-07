@@ -1,8 +1,8 @@
 #!/bin/bash
-# 
-# This is the main build script for the may 15 smaccm air team drop
-# Ideally, running this script shoudl produce an image for the odroid
-# and an image for the pixhawk.
+#
+# This is the main build script for the May 15 SMACCM ODROID red team drop.
+# Running this script should produce an image for the odroid and an image
+# for the pixhawk.
 #
 # This script should work on Ubuntu 12.04 amd64 server edition
 #
@@ -15,44 +15,51 @@ ODROID_APP_NAME=output
 CAMKES_DIR_NAME=camkes
 GALOIS_DIR_NAME=smaccmpilot-build
 
+BASE_DIR=$PWD
 
-BASE_DIR=$(pwd)
+mkdir $BUILD_DIR_NAME
+cd $BUILD_DIR_NAME
 
-mkdir $BUILD_DIR
-cd $BUILD_DIR
+echo "Configure APT"
 
-echo "adding ppa repositories"
+# Work around Ubuntu APT bug
+rm -rf /var/lib/apt/lists/*
+
+apt-get update
+apt-get -y install python-software-properties
 
 add-apt-repository -y ppa:ubuntu-toolchain-r/test
 add-apt-repository -y ppa:linaro-maintainers/toolchain
 add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 add-apt-repository -y ppa:webupd8team/java
 
-echo "get all the apt stuff"
-a
 apt-get update
 
 # we have to do this to say yes to the java 8 license agreement
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
-apt-get -y install gcc-4.8 git libgmp3-dev zlib1g-dev software-properties-common \ 
-                   python-software-properties make libtinfo-dev libncurses5-dev  \
-                   gcc-arm-linux-gnueabi python-tmpita python-pip libxml2-utils  \
+apt-get -y install gcc-4.8 git libgmp3-dev zlib1g-dev software-properties-common \
+                   make libtinfo-dev libncurses5-dev  \
+                   gcc-arm-linux-gnueabi python-tempita python-pip libxml2-utils  \
                    gcc-arm-none-eabi oracle-java8-installer
+
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
 pip install --upgrade pip
 pip install jinja2 ply pyelftools
 
 
-echo "install the haskell platform"
+HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
+if [ ! -e $HASKELL_TARBALL ]
+then
+  echo "Install the haskell platform"
+  wget https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
+  tar -xzf $HASKELL_TARBALL --directory /
+  /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
+fi
 
-wget https://www.haskell.org/platform/download/2014.2.0.0/haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
-
-tar -xzf ~/$BUILD_DIR_NAME/haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz --directory /
-/usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
-
-echo "update cabal"
+echo "Update cabal"
 
 cabal update
 cabal install cabal-install
