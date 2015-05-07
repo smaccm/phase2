@@ -91,11 +91,11 @@ git clone https://github.com/GaloisInc/smaccmpilot-build.git $GALOIS_DIR_NAME
 cd $GALOIS_DIR_NAME
 
 git checkout feature/tower9
-git submodule update —init
+git submodule update --init
 cd tower-camkes-odroid
 make create-sandbox
 
-cabal run serial-test — —out-dir=$ODROID_APP_NAME
+cabal run serial-test -- --out-dir=$ODROID_APP_NAME
 cd $ODROID_APP_NAME
 
 echo "RAMSES_PATH=$BASE_DIR/ramses/ramses-demo" > ../RAMSES_PATH.mk
