@@ -50,6 +50,7 @@ apt-get -y install gcc-4.8 git libgmp3-dev zlib1g-dev software-properties-common
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
 pip install --upgrade pip
+hash -r
 pip install jinja2 ply pyelftools
 
 
