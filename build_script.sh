@@ -4,11 +4,12 @@
 # Running this script should produce an image for the odroid and an image
 # for the pixhawk.
 #
-# This script should work on Ubuntu 12.04 amd64 server edition
+# This script should work on Ubuntu 12.04 amd64 server edition with
+# at least 20gb hard-drive space
 #
-# make sure to run this with sudo!
+# Must be run with sudo.
 #
-####################################################
+############################################################
 
 BUILD_DIR_NAME=smaccmcopter-ph2-build
 ODROID_APP_NAME=output
@@ -20,7 +21,9 @@ BASE_DIR=$PWD
 mkdir $BUILD_DIR_NAME
 cd $BUILD_DIR_NAME
 
+echo "************************************************************"
 echo "Configure APT"
+echo "************************************************************"
 
 # Work around Ubuntu APT bug
 rm -rf /var/lib/apt/lists/*
@@ -53,13 +56,17 @@ pip install jinja2 ply pyelftools
 HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
 if [ ! -e $HASKELL_TARBALL ]
 then
+  echo "************************************************************"
   echo "Install the haskell platform"
+  echo "************************************************************"
   wget https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
   tar -xzf $HASKELL_TARBALL --directory /
   /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
 fi
 
+echo "************************************************************"
 echo "Update cabal"
+echo "************************************************************"
 
 cabal update
 cabal install cabal-install
@@ -69,12 +76,15 @@ export PATH=/home/smaccm/.cabal/bin/cabal:$PATH
 cabal install alex happy
 cabal install MissingH data-ordlist split
 
-echo "download ramses"
+echo "************************************************************"
+echo "Download ramses"
+echo "************************************************************"
 
 git clone https://github.com/smaccm/phase2.git ramses
 
-
+echo "************************************************************"
 echo "download galois code"
+echo "************************************************************"
 
 git clone https://github.com/GaloisInc/smaccmpilot-build.git $GALOIS_DIR_NAME
 cd $GALOIS_DIR_NAME
@@ -90,7 +100,9 @@ cd $ODROID_APP_NAME
 echo "RAMSES_PATH=$BASE_DIR/ramses/ramses-demo" > ../RAMSES_PATH.mk
 make
 
+echo "************************************************************"
 echo "get repo and the camkes stuff"
+echo "************************************************************"
 
 cd $BASE_DIR/$BUILD_DIR_NAME
 
@@ -103,8 +115,9 @@ cd $CAMKES_DIR_NAME
 ../repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git 
 ../repo sync
 
-
+echo "************************************************************"
 echo "linking in the galois app"
+echo "************************************************************"
 
 ln -s $BASE_DIR/$BUILD_DIR_NAME/$GALOIS_DIR_NAME/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODROID_APP_NAME
 
