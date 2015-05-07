@@ -1,0 +1,111 @@
+#!/bin/bash
+# 
+# This is the main build script for the may 15 smaccm air team drop
+# Ideally, running this script shoudl produce an image for the odroid
+# and an image for the pixhawk.
+#
+# This script should work on Ubuntu 12.04 amd64 server edition
+#
+# make sure to run this with sudo!
+#
+####################################################
+
+BUILD_DIR_NAME=smaccmcopter-ph2-build
+ODROID_APP_NAME=output
+CAMKES_DIR_NAME=camkes
+GALOIS_DIR_NAME=smaccmpilot-build
+
+
+BASE_DIR=$(pwd)
+
+mkdir $BUILD_DIR
+cd $BUILD_DIR
+
+echo "adding ppa repositories"
+
+add-apt-repository -y ppa:ubuntu-toolchain-r/test
+add-apt-repository -y ppa:linaro-maintainers/toolchain
+add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
+add-apt-repository -y ppa:webupd8team/java
+
+echo "get all the apt stuff"
+a
+apt-get update
+
+# we have to do this to say yes to the java 8 license agreement
+echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+
+apt-get -y install gcc-4.8 git libgmp3-dev zlib1g-dev software-properties-common \ 
+                   python-software-properties make libtinfo-dev libncurses5-dev  \
+                   gcc-arm-linux-gnueabi python-tmpita python-pip libxml2-utils  \
+                   gcc-arm-none-eabi oracle-java8-installer
+
+pip install --upgrade pip
+pip install jinja2 ply pyelftools
+
+
+echo "install the haskell platform"
+
+wget https://www.haskell.org/platform/download/2014.2.0.0/haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
+
+tar -xzf ~/$BUILD_DIR_NAME/haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz --directory /
+/usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
+
+echo "update cabal"
+
+cabal update
+cabal install cabal-install
+
+export PATH=/home/smaccm/.cabal/bin/cabal:$PATH
+
+cabal install alex happy
+cabal install MissingH data-ordlist split
+
+echo "download ramses"
+
+git clone https://github.com/smaccm/phase2.git ramses
+
+
+echo "download galois code"
+
+git clone https://github.com/GaloisInc/smaccmpilot-build.git $GALOIS_DIR_NAME
+cd $GALOIS_DIR_NAME
+
+git checkout feature/tower9
+git submodule update —init
+cd tower-camkes-odroid
+make create-sandbox
+
+cabal run serial-test — —out-dir=$ODROID_APP_NAME
+cd $ODROID_APP_NAME
+
+echo "RAMSES_PATH=$BASE_DIR/ramses/ramses-demo" > ../RAMSES_PATH.mk
+make
+
+echo "get repo and the camkes stuff"
+
+cd $BASE_DIR/$BUILD_DIR_NAME
+
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo
+chmod 755 repo
+
+mkdir $CAMKES_DIR_NAME
+cd $CAMKES_DIR_NAME
+
+../repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git 
+../repo sync
+
+
+echo "linking in the galois app"
+
+ln -s $BASE_DIR/$BUILD_DIR_NAME/$GALOIS_DIR_NAME/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODROID_APP_NAME
+
+#TODO fix the menuconfig stuff
+
+
+
+
+
+
+
