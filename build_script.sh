@@ -7,9 +7,9 @@
 # This script should work on Ubuntu 12.04 amd64 server edition with
 # at least 20gb hard-drive space
 #
-# Must be run with sudo.
+# Must be run with sudo. Will display and save output to output.txt
 #
-############################################################
+###########################################################################
 
 BUILD_DIR_NAME=smaccmcopter-ph2-build
 ODROID_APP_NAME=output
@@ -17,6 +17,16 @@ CAMKES_DIR_NAME=camkes
 GALOIS_DIR_NAME=smaccmpilot-build
 
 BASE_DIR=$PWD
+
+if [[ $(id -u) -ne 0 ]]
+then
+    echo "Please run as root"
+    exit 1
+fi
+
+# Save all output to output.txt
+exec > >(tee output.txt)
+exec 2>&1
 
 mkdir $BUILD_DIR_NAME
 cd $BUILD_DIR_NAME
@@ -60,7 +70,7 @@ then
   echo "************************************************************"
   echo "Install the haskell platform"
   echo "************************************************************"
-  wget https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
+  wget --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
   tar -xzf $HASKELL_TARBALL --directory /
   /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
 fi
@@ -125,15 +135,16 @@ ln -s $BASE_DIR/$BUILD_DIR_NAME/$GALOIS_DIR_NAME/tower-camkes-odroid/$ODROID_APP
 # Put our odroid app into the top-level Kconfig
 # TODO: This may not be needed if the app is already in the Kconfig
 
-sed -i "/\"Applications\"/a\    source \"apps\/$ODROID_APP_NAME\/Kconfig\"" Kconfig
+sed --follow-symlinks --in-place "/\"Applications\"/a\    source \"apps\/$ODROID_APP_NAME\/Kconfig\"" Kconfig
 
 # Modify the can defconfig to fit the current app
 # TODO: This may not be needed if we already have a defconfig
 
 make can_defconfig
-sed -i "s/CONFIG_APP_CAN=y/# CONFIG_APP_CAN is not set/" .config
+sed --in-place "s/CONFIG_APP_CAN=y/# CONFIG_APP_CAN is not set/" .config
 echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
 make
 
-
+cd $BASE_DIR
+chown -R $USER $BUILD_DIR_NAME
 
