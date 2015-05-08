@@ -108,7 +108,7 @@ make create-sandbox
 cabal run serial-test -- --out-dir=$ODROID_APP_NAME
 cd $ODROID_APP_NAME
 
-echo "RAMSES_PATH=$BASE_DIR/ramses/ramses-demo" > ../RAMSES_PATH.mk
+echo "RAMSES_PATH=$BASE_DIR/$BUILD_DIR_NAME/ramses/ramses-demo" > ../RAMSES_PATH.mk
 make
 
 echo "************************************************************"
