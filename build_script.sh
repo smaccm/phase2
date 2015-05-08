@@ -146,5 +146,5 @@ echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
 make
 
 cd $BASE_DIR
-chown -R $USER $BUILD_DIR_NAME
+chown -R `logname` $BUILD_DIR_NAME
 
