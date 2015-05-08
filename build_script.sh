@@ -66,7 +66,8 @@ apt-get -y --force-yes install gcc-4.8 \
                                python-pip \
                                libxml2-utils \
                                gcc-arm-none-eabi \
-                               oracle-java8-installer
+                               oracle-java8-installer \
+                               u-boot-tools
 
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
@@ -157,7 +158,7 @@ echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
 make
 
 cd images
-mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-exerpimental-image-arm-exynos5 odroid-image
+mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
 
 cd $BASE_DIR
 chown -R `logname` $BUILD_DIR_NAME
