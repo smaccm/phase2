@@ -122,11 +122,18 @@ echo "************************************************************"
 
 ln -s $BASE_DIR/$BUILD_DIR_NAME/$GALOIS_DIR_NAME/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODROID_APP_NAME
 
-#TODO fix the menuconfig stuff
+# Put our odroid app into the top-level Kconfig
+# TODO: This may not be needed if the app is already in the Kconfig
 
+sed -i "/\"Applications\"/a\    source \"apps\/$ODROID_APP_NAME\/Kconfig\"" Kconfig
 
+# Modify the can defconfig to fit the current app
+# TODO: This may not be needed if we already have a defconfig
 
-
+make can_defconfig
+sed -i "s/CONFIG_APP_CAN=y/# CONFIG_APP_CAN is not set/" .config
+echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
+make
 
 
 
