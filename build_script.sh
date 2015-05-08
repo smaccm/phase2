@@ -156,6 +156,9 @@ sed --in-place "s/CONFIG_APP_CAN=y/# CONFIG_APP_CAN is not set/" .config
 echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
 make
 
+cd images
+mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-exerpimental-image-arm-exynos5 odroid-image
+
 cd $BASE_DIR
 chown -R `logname` $BUILD_DIR_NAME
 
