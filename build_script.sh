@@ -52,21 +52,21 @@ apt-get update
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
-apt-get -y install gcc-4.8 \
-                   git \
-                   libgmp3-dev \
-                   zlib1g-dev \
-                   software-properties-common \
-                   make \
-                   libtinfo-dev \
-                   libncurses5-dev \
-                   realpath \
-                   gcc-arm-linux-gnueabi \
-                   python-tempita \
-                   python-pip \
-                   libxml2-utils \
-                   gcc-arm-none-eabi \
-                   oracle-java8-installer
+apt-get -y --force-yes install gcc-4.8 \
+                               git \
+                               libgmp3-dev \
+                               zlib1g-dev \
+                               software-properties-common \
+                               make \
+                               libtinfo-dev \
+                               libncurses5-dev \
+                               realpath \
+                               gcc-arm-linux-gnueabi \
+                               python-tempita \
+                               python-pip \
+                               libxml2-utils \
+                               gcc-arm-none-eabi \
+                               oracle-java8-installer
 
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
