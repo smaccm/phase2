@@ -45,6 +45,7 @@ add-apt-repository -y ppa:ubuntu-toolchain-r/test
 add-apt-repository -y ppa:linaro-maintainers/toolchain
 add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 add-apt-repository -y ppa:webupd8team/java
+add-apt-repository -y ppa:nilarimogard/webupd8
 
 apt-get update
 
@@ -67,7 +68,9 @@ apt-get -y --force-yes install gcc-4.8 \
                                libxml2-utils \
                                gcc-arm-none-eabi \
                                oracle-java8-installer \
-                               u-boot-tools
+                               u-boot-tools \
+                               minicom \
+                               android-tools-fastboot
 
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
@@ -160,6 +163,19 @@ make
 cd images
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
 
+# Set up fastboot
+
+echo SUBSYSTEM==\"usb\", ATTR{idVendor}==\"18d1\", MODE==\"0666\", GROUP==\"`logname`\" > /etc/udev/rules.d/40-odroidxu-fastboot.rules
+
+cat >~/.minirc.odroid <<EOF
+pu port             /dev/ttyUSB0
+pu baudrate         115200
+pu bits             8
+pu parity           N
+pu stopbits         1
+pu rtscts           No
+EOF
+chown `logname` ~/.minirc.odroid
+
 cd $BASE_DIR
 chown -R `logname` $BUILD_DIR_NAME
-

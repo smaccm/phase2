@@ -1,0 +1,1 @@
+ODROID_APP_NAME=output
