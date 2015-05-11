@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [[ ! -e scripts/main.sh ]]
+if [[ ! -e main.sh ]]
 then
-    echo "Must be run in phase2 repository directory"
+    echo "Must be run in phase2/scripts directory"
     exit 1
 fi
 
-source "scripts/variables.sh"
+source "variables.sh"
+cd ..
 
 echo "************************************************************"
 echo "Build smaccmpilot"
