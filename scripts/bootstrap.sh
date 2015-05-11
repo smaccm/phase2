@@ -1,13 +1,15 @@
 #!/bin/bash
 #
-# This is the main build script for the May 15 SMACCM ODROID red team drop.
-# Running this script should produce an image for the odroid and an image
-# for the pixhawk.
+# This is the bootstrapping script for the May 15 SMACCM ODROID red team
+# drop. Running this script should produce an image for the odroid and an
+# image for the pixhawk.
 #
-# This script should work on Ubuntu 12.04 amd64 server edition with
-# at least 20gb hard-drive space
+# This script should work on freshly installed Ubuntu 12.04 amd64 server
+# edition with at least 20gb hard-drive space. If your system already
+# has git and the phase2 repository, then you can just run the 'main.sh'
+# script from within the phase2 repository instead.
 #
-# Must be run with sudo. Will display and save output to output.txt
+# Will display and save output to output.txt
 #
 ###########################################################################
 

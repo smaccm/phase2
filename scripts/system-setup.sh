@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-if [[ ! -e scripts/system-setup.sh ]]
+if [[ ! -e scripts/main.sh ]]
 then
     echo "Must be run in phase2 repository directory"
     exit 1

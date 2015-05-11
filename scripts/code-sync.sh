@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ! -e scripts/code-sync.sh ]]
+if [[ ! -e scripts/main.sh ]]
 then
     echo "Must be run in phase2 repository directory"
     exit 1
