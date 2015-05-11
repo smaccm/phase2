@@ -35,8 +35,7 @@ git clone https://github.com/smaccm/phase2.git $BUILD_DIR_NAME
 cd $BUILD_DIR_NAME
 
 echo "************************************************************"
-echo "Call subscript"
+echo "Call subscripts"
 echo "************************************************************"
 
-(exec sudo "scripts/system-setup.sh")
-(exec "scripts/code-setup.sh")
+(exec "scripts/main.sh")
