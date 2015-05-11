@@ -10,10 +10,6 @@ fi
 
 source "scripts/variables.sh"
 
-# Save all output to output.txt
-exec >> >(tee output.txt)
-exec 2>&1
-
 echo "************************************************************"
 echo "Get smaccmpilot code"
 echo "************************************************************"

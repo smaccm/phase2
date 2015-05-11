@@ -14,7 +14,7 @@
 export BUILD_DIR_NAME=smaccmcopter-ph2-build
 
 # Save all output to output.txt
-exec >> >(tee output.txt)
+exec > >(tee output.txt)
 exec 2>&1
 
 echo "************************************************************"
