@@ -1,10 +1,14 @@
 #!/bin/bash
 
-source "variables.sh"
-
 if [[ $(id -u) -ne 0 ]]
 then
-    echo "Please run as root"
+    echo "Must be run as root"
+    exit 1
+fi
+
+if [[ ! -e scripts/system-setup.sh ]]
+then
+    echo "Must be run in phase2 repository directory"
     exit 1
 fi
 
@@ -87,5 +91,30 @@ echo "************************************************************"
 echo "Update cabal"
 echo "************************************************************"
 
-cabal update
-cabal install cabal-install
+sudo -u `logname` cabal update
+cabal install --globally cabal-install
+cabal install --globally alex happy
+cabal install --globally MissingH data-ordlist split
+
+echo "************************************************************"
+echo "Get and install repo"
+echo "************************************************************"
+
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/bin/local/repo
+chmod 755 /usr/bin/local/repo
+
+echo "************************************************************"
+echo "Set up minicom and fastboot"
+echo "************************************************************"
+
+echo SUBSYSTEM==\"usb\", ATTR{idVendor}==\"18d1\", MODE==\"0666\", GROUP==\"`logname`\" > /etc/udev/rules.d/40-odroidxu-fastboot.rules
+
+cat >~/.minirc.odroid <<EOF
+pu port             /dev/ttyUSB0
+pu baudrate         115200
+pu bits             8
+pu parity           N
+pu stopbits         1
+pu rtscts           No
+EOF
+chown `logname` ~/.minirc.odroid

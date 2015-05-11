@@ -18,7 +18,7 @@ exec >> >(tee output.txt)
 exec 2>&1
 
 echo "************************************************************"
-echo "Obtaining git"
+echo "Get git"
 echo "************************************************************"
 
 # Work around Ubuntu APT bug
@@ -28,14 +28,15 @@ sudo apt-get update
 sudo apt-get -y install git
 
 echo "************************************************************"
-echo "Obtaining phase2 repository"
+echo "Get phase2 repository"
 echo "************************************************************"
 
 git clone https://github.com/smaccm/phase2.git $BUILD_DIR_NAME
 cd $BUILD_DIR_NAME
 
 echo "************************************************************"
-echo "Calling system setup script"
+echo "Call subscript"
 echo "************************************************************"
 
 (exec sudo "scripts/system-setup.sh")
+(exec "scripts/code-setup.sh")
