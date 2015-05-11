@@ -23,6 +23,7 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/tower-camkes-odroid
+make create-sandbox
 cabal run serial-test -- --out-dir=$ODROID_APP_NAME
 make -C $ODROID_APP_NAME
 cd ../..
@@ -36,3 +37,7 @@ make
 
 cd images
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
+
+echo "************************************************************"
+echo "Odroid image: $PWD"
+echo "************************************************************"

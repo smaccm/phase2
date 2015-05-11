@@ -92,9 +92,9 @@ echo "Update cabal"
 echo "************************************************************"
 
 sudo -u `logname` cabal update
-cabal install --globally cabal-install
-cabal install --globally alex happy
-cabal install --globally MissingH data-ordlist split
+cabal install --global cabal-install
+cabal install --global alex happy
+cabal install --global MissingH data-ordlist split
 
 echo "************************************************************"
 echo "Get and install repo"
