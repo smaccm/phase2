@@ -19,7 +19,6 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/tower-camkes-odroid
-make create-sandbox
 cabal run serial-test -- --out-dir=$ODROID_APP_NAME
 make -C $ODROID_APP_NAME
 cd ../..
