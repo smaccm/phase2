@@ -100,8 +100,8 @@ echo "************************************************************"
 echo "Get and install repo"
 echo "************************************************************"
 
-curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/bin/local/repo
-chmod 755 /usr/bin/local/repo
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo
+chmod 755 /usr/local/bin/repo
 
 echo "************************************************************"
 echo "Set up minicom and fastboot"
