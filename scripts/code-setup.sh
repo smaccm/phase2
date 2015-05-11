@@ -28,7 +28,8 @@ echo "************************************************************"
 git checkout feature/tower9
 git submodule update --init
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
-make -C tower-camkes-odroid create-sandbox
+mkdir tower-camkes-odroid/$ODROID_APP_NAME
+cd ..
 
 echo "************************************************************"
 echo "Get camkes code"
