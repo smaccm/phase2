@@ -1,16 +1,18 @@
 #!/bin/bash
 
+if [[ ! -e main.sh ]]
+then
+    echo "Must be run in phase2/scripts directory"
+    exit 1
+fi
+
 if [[ $(id -u) -ne 0 ]]
 then
     echo "Must be run as root"
     exit 1
 fi
 
-if [[ ! -e scripts/main.sh ]]
-then
-    echo "Must be run in phase2 repository directory"
-    exit 1
-fi
+cd ..
 
 echo "************************************************************"
 echo "Configure apt"

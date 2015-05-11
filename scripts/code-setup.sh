@@ -1,14 +1,15 @@
 #!/bin/bash
 
-BASE_DIR=$PWD
-
-if [[ ! -e scripts/main.sh ]]
+if [[ ! -e main.sh ]]
 then
-    echo "Must be run in phase2 repository directory"
+    echo "Must be run in phase2/scripts directory"
     exit 1
 fi
 
-source "scripts/variables.sh"
+source "variables.sh"
+cd ..
+
+BASE_DIR=$PWD
 
 echo "************************************************************"
 echo "Get smaccmpilot code"
