@@ -11,7 +11,7 @@
 #
 ###########################################################################
 
-BUILD_DIR_NAME=smaccmcopter-ph2-build
+export BUILD_DIR_NAME=smaccmcopter-ph2-build
 
 # Save all output to output.txt
 exec >> >(tee output.txt)
@@ -38,4 +38,4 @@ echo "************************************************************"
 echo "Calling system setup script"
 echo "************************************************************"
 
-(exec "sudo scripts/system-setup.sh")
+(exec sudo "scripts/system-setup.sh")
