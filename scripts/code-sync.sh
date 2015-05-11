@@ -7,12 +7,16 @@ then
 fi
 
 echo "************************************************************"
-echo "Syncing to latest version of code"
+echo "Syncing smaccmbuild"
 echo "************************************************************"
 
 cd smaccmpilot-build
 git pull
 cd ..
+
+echo "************************************************************"
+echo "Syncing camkes"
+echo "************************************************************"
 
 cd camkes
 repo sync
