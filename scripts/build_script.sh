@@ -179,4 +179,3 @@ chown `logname` ~/.minirc.odroid
 
 cd $BASE_DIR
 chown -R `logname` $BUILD_DIR_NAME
-

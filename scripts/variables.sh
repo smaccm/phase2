@@ -1,0 +1,5 @@
+ODROID_APP_NAME=output
+CAMKES_DIR_NAME=camkes
+GALOIS_DIR_NAME=smaccmpilot-build
+
+BASE_DIR=$PWD
