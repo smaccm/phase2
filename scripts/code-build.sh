@@ -28,5 +28,5 @@ cd images
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
 
 echo "************************************************************"
-echo "Odroid image: $PWD"
+echo "Odroid image: $PWD/odroid-image"
 echo "************************************************************"
