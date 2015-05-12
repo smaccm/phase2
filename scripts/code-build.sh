@@ -26,7 +26,10 @@ cd camkes
 make
 
 cd images
-mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
+if [[ -e capdl-loader-experimental-image-arm-exynos5 ]]
+then
+    mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
+fi
 
 if [[ ! -e odroid-image ]]
 then

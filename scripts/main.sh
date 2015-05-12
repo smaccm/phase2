@@ -12,3 +12,9 @@
 (exec sudo "./system-setup.sh")
 (exec "./code-setup.sh")
 (exec "./code-build.sh")
+
+if [[ ! -e ../camkes/images/odroid-image ]]
+then
+    echo "Failed to build odroid-image"
+    exit 1
+fi
