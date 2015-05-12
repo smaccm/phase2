@@ -1,2 +1,2 @@
-script: "scripts/main.sh"
+script: "cd scripts && ./main.sh"
 

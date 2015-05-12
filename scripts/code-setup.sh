@@ -48,8 +48,8 @@ ln -s $BASE_DIR/smaccmpilot-build/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODR
 # Modify the can defconfig to fit the current app
 # TODO: This may not be needed if we already have a defconfig
 
-make can_defconfig
-sed --in-place "s/CONFIG_APP_CAN=y/# CONFIG_APP_CAN is not set/" .config
+make odroid_timer__defconfig
+sed --in-place "s/CONFIG_APP_TIMER_ODROID=y/# CONFIG_APP_TIMER_ODROID is not set/" .config
 echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
 
 # Put our odroid app into the top-level Kconfig
