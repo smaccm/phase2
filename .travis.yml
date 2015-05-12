@@ -3,6 +3,9 @@ language: haskell
 ghc:
   - 7.8
 
+install:
+  - true
+
 script:
   - cd scripts
   - ./main.sh
