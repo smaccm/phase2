@@ -73,30 +73,30 @@ hash -r
 pip install jinja2 ply pyelftools
 
 
-echo "************************************************************"
-echo "Install haskell platform"
-echo "************************************************************"
-
-HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
-wget --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
-tar -xzf $HASKELL_TARBALL --directory /
-/usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
-
-
-echo "************************************************************"
-echo "Update cabal"
-echo "************************************************************"
-
-sudo -u `logname` cabal update
 # Installing cabal and cabal-install on Travis exceeds memory bound
 if [[ "$TRAVIS" != true ]]
 then
+    echo "************************************************************"
+    echo "Install haskell platform"
+    echo "************************************************************"
+
+    HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
+    wget --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
+    tar -xzf $HASKELL_TARBALL --directory /
+    /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
+
+    echo "************************************************************"
+    echo "Update cabal"
+    echo "************************************************************"
+
+    sudo -u `logname` cabal update
+
     cabal install --global cabal-install
+    cabal install --global alex happy
+    cabal install --global MissingH data-ordlist split
+    # Fix permissions caused by running cabal as root
+    chown `logname` -R ~/.cabal
 fi
-cabal install --global alex happy
-cabal install --global MissingH data-ordlist split
-# Fix permissions caused by running cabal as root
-chown `logname` -R ~/.cabal
 
 
 echo "************************************************************"

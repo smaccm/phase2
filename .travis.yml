@@ -4,7 +4,7 @@ ghc:
   - 7.8
 
 install:
-  - true
+  - cabal install alex happy MissingH data-ordlist split
 
 script:
   - cd scripts
