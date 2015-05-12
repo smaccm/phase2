@@ -28,6 +28,8 @@ sudo rm -rf /var/lib/apt/lists/*
 
 sudo apt-get update
 sudo apt-get -y install git
+git config --global user.email "smaccm@googlegroups.com"
+git config --global user.name "SMACCM"
 
 echo "************************************************************"
 echo "Get phase2 repository"

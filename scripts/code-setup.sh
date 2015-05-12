@@ -48,7 +48,7 @@ ln -s $BASE_DIR/smaccmpilot-build/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODR
 # Modify the can defconfig to fit the current app
 # TODO: This may not be needed if we already have a defconfig
 
-make odroid_timer__defconfig
+make odroid_timer_defconfig
 sed --in-place "s/CONFIG_APP_TIMER_ODROID=y/# CONFIG_APP_TIMER_ODROID is not set/" .config
 echo "CONFIG_APP_${ODROID_APP_NAME^^}=y" >>.config
 
