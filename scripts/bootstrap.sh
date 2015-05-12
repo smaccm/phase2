@@ -41,4 +41,4 @@ echo "Call subscripts"
 echo "************************************************************"
 
 cd scripts
-(exec "main.sh")
+(exec "./main.sh")
