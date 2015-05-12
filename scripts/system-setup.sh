@@ -88,7 +88,11 @@ echo "Update cabal"
 echo "************************************************************"
 
 sudo -u `logname` cabal update
-cabal install --global cabal-install
+# Installing cabal and cabal-install on Travis exceeds memory bound
+if [[ "$TRAVIS" != true ]]
+then
+    cabal install --global cabal-install
+fi
 cabal install --global alex happy
 cabal install --global MissingH data-ordlist split
 # Fix permissions caused by running cabal as root

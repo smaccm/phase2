@@ -1,1 +1,8 @@
-script: "cd scripts && ./main.sh"
+language: haskell
+
+ghc:
+  - 7.8
+
+script:
+  - cd scripts
+  - ./main.sh
