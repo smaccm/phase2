@@ -1,6 +1,1 @@
-before_script:
-  - sudo dd if=/dev/zero of=/tmp/swap bs=1M count=2048
-  - sudo mkswap /tmp/swap
-  - sudo swapon /tmp/swap
-
 script: "cd scripts && ./main.sh"
