@@ -14,7 +14,7 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/tower-camkes-odroid
-cabal run serial-test -- --out-dir=$ODROID_APP_NAME
+cabal run $TOWER_APP_NAME -- --out-dir=$ODROID_APP_NAME
 make -C $ODROID_APP_NAME
 cd ../..
 
@@ -23,6 +23,7 @@ echo "Build kernel image via camkes"
 echo "************************************************************"
 
 cd camkes
+make $(ODROID_APP_NAME)_defconfig
 make
 
 cd images

@@ -1,1 +1,2 @@
-ODROID_APP_NAME=output
+ODROID_APP_NAME=smaccmpilot
+TOWER_APP_NAME=serial-test
