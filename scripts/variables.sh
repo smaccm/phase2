@@ -1,2 +1,2 @@
-ODROID_APP_NAME=smaccmpilot
-TOWER_APP_NAME=serial-test
+ODROID_APP_NAME=${ODROID_APP_NAME:-smaccmpilot}
+TOWER_APP_NAME=${TOWER_APP_NAME:-serial-test}
