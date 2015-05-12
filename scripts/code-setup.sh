@@ -36,12 +36,12 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git
-repo init -m workaround.xml
+repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git -b workaround
 repo sync
 
 echo "************************************************************"
 echo "Link in the smaccmpilot app"
 echo "************************************************************"
 
+rm apps/$ODROID_APP_NAME
 ln -s $BASE_DIR/smaccmpilot-build/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODROID_APP_NAME

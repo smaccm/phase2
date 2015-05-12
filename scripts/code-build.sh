@@ -23,7 +23,7 @@ echo "Build kernel image via camkes"
 echo "************************************************************"
 
 cd camkes
-make $(ODROID_APP_NAME)_defconfig
+make ${ODROID_APP_NAME}_defconfig
 make
 
 cd images
