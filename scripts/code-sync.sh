@@ -1,10 +1,12 @@
 #!/bin/bash
 
-if [[ ! -e scripts/main.sh ]]
+if [[ ! -e main.sh ]]
 then
-    echo "Must be run in phase2 repository directory"
+    echo "Must be run in phase2/scripts directory"
     exit 1
 fi
+
+cd ..
 
 echo "************************************************************"
 echo "Syncing smaccmbuild"
@@ -12,6 +14,7 @@ echo "************************************************************"
 
 cd smaccmpilot-build
 git pull
+git submodule update
 cd ..
 
 echo "************************************************************"

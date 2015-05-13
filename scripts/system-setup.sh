@@ -1,16 +1,19 @@
 #!/bin/bash
 
+if [[ ! -e main.sh ]]
+then
+    echo "Must be run in phase2/scripts directory"
+    exit 1
+fi
+
 if [[ $(id -u) -ne 0 ]]
 then
     echo "Must be run as root"
     exit 1
 fi
 
-if [[ ! -e scripts/main.sh ]]
-then
-    echo "Must be run in phase2 repository directory"
-    exit 1
-fi
+cd ..
+
 
 echo "************************************************************"
 echo "Configure apt"
@@ -27,6 +30,7 @@ add-apt-repository -y ppa:linaro-maintainers/toolchain
 add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 add-apt-repository -y ppa:webupd8team/java
 add-apt-repository -y ppa:nilarimogard/webupd8
+
 
 echo "************************************************************"
 echo "Install apt software"
@@ -69,28 +73,31 @@ hash -r
 pip install jinja2 ply pyelftools
 
 
-echo "************************************************************"
-echo "Install haskell platform"
-echo "************************************************************"
-HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
-if [ ! -e $HASKELL_TARBALL ]
+# Installing cabal and cabal-install on Travis exceeds memory bound
+if [[ "$TRAVIS" != true ]]
 then
-  echo "************************************************************"
-  echo "Install the haskell platform"
-  echo "************************************************************"
-  wget --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
-  tar -xzf $HASKELL_TARBALL --directory /
-  /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
+    echo "************************************************************"
+    echo "Install haskell platform"
+    echo "************************************************************"
+
+    HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
+    wget --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
+    tar -xzf $HASKELL_TARBALL --directory /
+    /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
+
+    echo "************************************************************"
+    echo "Update cabal"
+    echo "************************************************************"
+
+    sudo -u `logname` cabal update
+
+    cabal install --global cabal-install
+    cabal install --global alex happy
+    cabal install --global MissingH data-ordlist split
+    # Fix permissions caused by running cabal as root
+    chown `logname` -R ~/.cabal
 fi
 
-echo "************************************************************"
-echo "Update cabal"
-echo "************************************************************"
-
-sudo -u `logname` cabal update
-cabal install --global cabal-install
-cabal install --global alex happy
-cabal install --global MissingH data-ordlist split
 
 echo "************************************************************"
 echo "Get and install repo"
@@ -98,6 +105,7 @@ echo "************************************************************"
 
 curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo
 chmod 755 /usr/local/bin/repo
+
 
 echo "************************************************************"
 echo "Set up minicom and fastboot"

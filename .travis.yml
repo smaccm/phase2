@@ -1,2 +1,15 @@
-script: "scripts/main.sh"
+language: haskell
 
+ghc:
+  - 7.8
+
+install:
+  - cabal install alex happy MissingH data-ordlist split
+
+script:
+  - cd scripts
+  - ./main.sh
+
+env:
+  - TOWER_APP_NAME=serial-test
+  - TOWER_APP_NAME=can-test
