@@ -17,12 +17,12 @@ After running `main.sh` you will have four folders in the phase2 directory:
 3. scripts
 4. smaccmpilot-build
 
-The camkes directory contains all of the source code for sel4 and symlinks to a few demo applications (under camkes/apps). The ramses-demo directory contains code to run the AADL Trusted Build. The scripts directory contains scripts for seting up the system environment and building code. The smaccmpilot-build directory contains Galois' code for the different applications in this deliverable. 
+The camkes directory contains all of the source code for sel4 and symlinks to a few demo applications (under `camkes/apps`). The `ramses-demo` directory contains code to run the AADL Trusted Build. The `scripts` directory contains scripts for seting up the system environment and building code. The `smaccmpilot-build` directory contains Galois' code for the different applications in this deliverable. 
 
 How do I Run The Examples?
 ===============
 
-If you run the `main.sh` script a symlink called "smaccmpilot" will appear in the camkes/apps directory. This app is built by the `main.sh` script, and the final image will appear at camkes/images/odroid-image.
+If you run the `main.sh` script a symlink called "smaccmpilot" will appear in the `camkes/apps` directory. This app is built by the `main.sh` script, and the final image will appear at `camkes/images/odroid-image`.
 
 To load this image make sure that the USB-to-UART adapter is connected to the build machine and the odroid. Go to the your home directory and runthe command:
 
@@ -87,8 +87,17 @@ You should see sel4 booting on the screen where you ran minicom.
 What are the demos in this deliverable?
 ===============
 
-There are two applications: The serial test and the CAN test.
+There are two applications: The serial test and the CAN test. You can change which application is built by changing line 2 of `phase2/scripts/variables.sh` to be:
 
+```
+TOWER_APP_NAME=${TOWER_APP_NAME:-serial-test}
+```
+or
+```
+TOWER_APP_NAME=${TOWER_APP_NAME:-can-test}
+```
+
+*note that you can just run the `code-build.sh` script to rebuild the code rather then re-running everything with `main.sh`
 The serial test
 ===============
 
@@ -99,9 +108,9 @@ The telem port has a header on the underside of the daugher board (the side that
 Pin 1: unused<br/>
 pin 2: tx<br/>
 pin 3: rx<br/>
-pin 4: ground<br/>
+pin 4: positive 5 volts<br/>
 pin 5: unused<br/>
-pin 6: positive 5 volts<br/>
+pin 6: ground<br/>
 
 We used another USB-to-UART adapter to hook up to this header to view the output.
 
