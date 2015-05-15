@@ -34,6 +34,7 @@ echo "Get phase2 repository"
 echo "************************************************************"
 
 git clone https://github.com/smaccm/phase2.git $BUILD_DIR_NAME
+git checkout red-team-may-2015
 cd $BUILD_DIR_NAME
 
 echo "************************************************************"

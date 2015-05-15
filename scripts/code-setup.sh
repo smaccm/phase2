@@ -22,7 +22,7 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
-git checkout feature/tower9
+git checkout red-team-may-2015
 git submodule update --init
 cd tower-camkes-odroid
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
@@ -36,7 +36,7 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git -b workaround
+repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git -m red-team-may-2015.xml
 repo sync
 
 echo "************************************************************"
