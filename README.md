@@ -97,7 +97,7 @@ or
 TOWER_APP_NAME=${TOWER_APP_NAME:-can-test}
 ```
 
-*note that you can just run the `code-build.sh` script to rebuild the code rather then re-running everything with `main.sh`
+**Note that you can just run the `code-build.sh` script to rebuild the code rather then re-running everything with `main.sh`**
 The serial test
 ===============
 
