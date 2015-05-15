@@ -5,4 +5,101 @@ This is the repository for the phase 2 demo software and build support. The scri
 
 To do a full install run the `bootstrap.sh` script in a freshly installed Ubuntu 12.04 64-bit server with at least 20gb of hard-drive space. The script will download this repository and kick off the main build.
 
-If you already have this repository checked out then you can execute `main.sh` to install all the software dependencies for this project, check out all the code, and build the final images.
+If you already have this repository checked out then you can cd to phase2/scripts and execute `main.sh` to install all the software dependencies for this project, check out all the code, and build the final images.
+
+What is Located Where?
+===============
+
+After running main.sh you will have four folders in the phase2 directory:
+
+1. camkes
+2. ramses-demo
+3. scripts
+4. smaccmpilot-build
+
+The camkes directory contains all of the source code for sel4 and symlinks to a few demo applications (under camkes/apps). The ramses-demo directory contains code to run the AADL Trusted Build. The scripts directory contains scripts for seting up the system environment and building code. The smaccmpilot-build directory contains Galois' code for the different applications in this deliverable. 
+
+If you run the main.sh script a symlink called "smaccmpilot" will appear in the camkes/apps directory. This app is built by the main.sh script, and the final image will appear at camkes/images/odroid-image.
+
+To load this image make sure that the USB-to-UART adapter is connected to the build machine and the odroid. Go to the your home directory and runthe command:
+
+minicom odroid
+
+Then power on the odroid. Your screen should look like this:
+
+U-Boot 2012.07-g612e625 (Mar 21 2014 - 09:39:54) for Exynos5410
+
+CPU: Exynos5410 Rev2.3 [Samsung SOC on SMP Platform Base on ARM CortexA15]
+APLL = 900MHz, KPLL = 600MHz
+MPLL = 532MHz, BPLL = 800MHz
+DRAM:  2 GiB
+WARNING: Caches not enabled
+
+TrustZone Enabled BSP
+BL1 version: 
+PMIC VER : 0, CHIP REV : 6
+VDD MIF : 1.00000V
+VDD ARM : 1.00000V
+VDD INT : 1.00000V
+VDD G3D : 1.00000V
+VDD KFC : 1.00000V
+
+Checking Boot Mode ... EMMC4.41
+MMC:   S5P_MSHC0: 0, S5P_MSHC2: 1
+MMC Device 0: 7.3 GiB
+MMC Device 1: [ERROR] response error : 00000006 cmd 8
+[ERROR] response error : 00000006 cmd 55
+[ERROR] response error : 00000006 cmd 2
+In:    serial
+Out:   serial
+Err:   serial
+Net:   No ethernet found.
+Press 'Enter' or 'Space' to stop autoboot:  0 
+there are pending interrupts 0x00000001
+[Partition table on MoviNAND]
+ptn 0 name='fwbl1' start=0x20000 len=N/A (use hard-coded info. (cmd: movi))
+ptn 1 name='bl2' start=N/A len=N/A (use hard-coded info. (cmd: movi))
+ptn 2 name='bootloader' start=N/A len=N/A (use hard-coded info. (cmd: movi))
+ptn 3 name='tzsw' start=N/A len=N/A (use hard-coded info. (cmd: movi))
+ptn 4 name='kernel' start=N/A len=N/A (use hard-coded info. (cmd: movi))
+ptn 5 name='ramdisk' start=N/A len=0x4000(~16777216KB) (use hard-coded info. (cmd: movi))
+ptn 6 name='system' start=0x0 len=0x100EC1(~1077609984KB) 
+ptn 7 name='userdata' start=0x0 len=0x20005B(~-2147389952KB)
+ptn 8 name='cache' start=0x0 len=0x4198E(~275134464KB) 
+ptn 9 name='fat' start=0x0 len=0x3E2E3F(~-122094592KB) 
+USB cable Connected![0x4]
+
+Then in another terminal go to the phase2/camkes/images directory and run the command:
+
+sudo fastboot boot odroid-image
+
+You should see sel4 booting on the screen where you ran minicom.
+
+What are the demos in this deliverable?
+===============
+
+There are two applications: The serial test and the CAN test.
+
+The serial test
+===============
+
+The seial test prints ASCII characters to the "telem" port on the odroid daughterboard. If you send characters to the port it will print them to the debug terminal on the odroid (it will display them in the minicom window).
+
+The telem port has a header on the underside of the daugher board (the side that faces the odroid if they are on top of each other) that has easy to access. Looking directoy at the tips of the pins with the top side of the header facing the ground call the left most pin 1 and the right most pin 6. The pinout is as follows:
+
+Pin 1: unused
+pin 2: tx
+pin 3: rx
+pin 4: ground
+pin 5: unused
+pin 6: positive 5 volts.
+
+We used another USB-to-UART adapter to hook up to this header to view the output.
+
+The CAN Test
+===============
+
+The CAN test sends and receives messages on the CAN port and prints them to the debug console.  To run this test you can load the image on two odroid and have them talk to each other through the can port on the odroid daughter board. You can also attach the odroid to some other device as well.
+
+
+
