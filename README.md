@@ -5,12 +5,12 @@ This is the repository for the phase 2 demo software and build support. The scri
 
 To do a full install run the `bootstrap.sh` script in a freshly installed Ubuntu 12.04 64-bit server with at least 20gb of hard-drive space. The script will download this repository and kick off the main build.
 
-If you already have this repository checked out then you can cd to phase2/scripts and execute `main.sh` to install all the software dependencies for this project, check out all the code, and build the final images.
+If you already have this repository checked out then you can cd to `phase2/scripts` and execute `main.sh` to install all the software dependencies for this project, check out all the code, and build the final images.
 
 What is Located Where?
 ===============
 
-After running `main.sh` you will have four folders in the phase2 directory:
+After running `main.sh` you will have four folders in the `phase2` directory:
 
 1. camkes
 2. ramses-demo
@@ -120,4 +120,10 @@ The CAN Test
 The CAN test sends and receives messages on the CAN port and prints them to the debug console.  To run this test you can load the image on two odroid and have them talk to each other through the can port on the odroid daughter board. You can also attach the odroid to some other device as well.
 
 
+More detailed documentation
+===============
 
+View the READMEs for the other projects for more detailed documentation:
+
+https://github.com/GaloisInc/smaccmpilot-build/blob/feature/tower9/red-team-may-2015.md
+https://github.com/smaccm/may-drop-odroid-manifest
