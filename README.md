@@ -10,7 +10,7 @@ If you already have this repository checked out then you can cd to phase2/script
 What is Located Where?
 ===============
 
-After running main.sh you will have four folders in the phase2 directory:
+After running `main.sh` you will have four folders in the phase2 directory:
 
 1. camkes
 2. ramses-demo
@@ -19,7 +19,10 @@ After running main.sh you will have four folders in the phase2 directory:
 
 The camkes directory contains all of the source code for sel4 and symlinks to a few demo applications (under camkes/apps). The ramses-demo directory contains code to run the AADL Trusted Build. The scripts directory contains scripts for seting up the system environment and building code. The smaccmpilot-build directory contains Galois' code for the different applications in this deliverable. 
 
-If you run the main.sh script a symlink called "smaccmpilot" will appear in the camkes/apps directory. This app is built by the main.sh script, and the final image will appear at camkes/images/odroid-image.
+How do I Run The Examples?
+===============
+
+If you run the `main.sh` script a symlink called "smaccmpilot" will appear in the camkes/apps directory. This app is built by the `main.sh` script, and the final image will appear at camkes/images/odroid-image.
 
 To load this image make sure that the USB-to-UART adapter is connected to the build machine and the odroid. Go to the your home directory and runthe command:
 
