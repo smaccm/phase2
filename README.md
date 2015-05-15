@@ -87,7 +87,7 @@ You should see sel4 booting on the screen where you ran minicom.
 What are the demos in this deliverable?
 ===============
 
-There are two applications: The serial test and the CAN test. You can change which application is built by changing line 2 of `phase2/scripts/variables.sh` to be:
+There are two applications that run on the odroid: The serial test and the CAN test. You can change which application is built by changing line 2 of `phase2/scripts/variables.sh` to be:
 
 ```
 TOWER_APP_NAME=${TOWER_APP_NAME:-serial-test}
@@ -98,6 +98,7 @@ TOWER_APP_NAME=${TOWER_APP_NAME:-can-test}
 ```
 
 **Note that you can just run the `code-build.sh` script to rebuild the code rather then re-running everything with `main.sh`**
+**Also note that there are other applications in this deliverable that run on the pixhawk. Documentation for these can be found here: https://github.com/smaccm/may-drop-odroid-manifest**
 The serial test
 ===============
 
