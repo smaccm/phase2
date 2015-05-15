@@ -98,6 +98,7 @@ TOWER_APP_NAME=${TOWER_APP_NAME:-can-test}
 ```
 
 **Note that you can just run the `code-build.sh` script to rebuild the code rather then re-running everything with `main.sh`**
+<br/><br/>
 **Also note that there are other applications in this deliverable that run on the pixhawk. Documentation for these can be found here: https://github.com/smaccm/may-drop-odroid-manifest**
 The serial test
 ===============
