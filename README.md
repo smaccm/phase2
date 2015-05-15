@@ -5,7 +5,7 @@ This is the repository for the phase 2 demo software and build support. The scri
 
 To do a full install run the `bootstrap.sh` script in a freshly installed Ubuntu 12.04 64-bit server with at least 20gb of hard-drive space. The script will download this repository and kick off the main build.
 
-If you already have this repository checked out then you can cd to `phase2/scripts` and execute `main.sh` to install all the software dependencies for this project, check out all the code, and build the final images.
+If you already have this repository checked out and are on the branch `red-team-may-2015` then you can cd to `phase2/scripts` and execute `main.sh` to kick off the main build directly. This will install all the software dependencies for this project, check out all the code, and build the final images.
 
 What is located where?
 ===============
@@ -104,7 +104,7 @@ TOWER_APP_NAME=${TOWER_APP_NAME:-can-test}
 
 **Note that you can just run the `code-build.sh` script to rebuild the code rather then re-running everything with `main.sh`**
 
-**Also note that there are other applications in this deliverable that run on the pixhawk. Documentation for these can be found here: https://github.com/GaloisInc/smaccmpilot-build/blob/feature/tower9/red-team-may-2015.md**
+**Also note that there are other applications in this deliverable that run on the Pixhawk. Documentation for these can be found here: https://github.com/GaloisInc/smaccmpilot-build/blob/feature/tower9/red-team-may-2015.md**
 
 The serial test
 ===============
