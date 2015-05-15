@@ -78,7 +78,9 @@ USB cable Connected![0x4]
 
 Then in another terminal go to the phase2/camkes/images directory and run the command:
 
+```
 sudo fastboot boot odroid-image
+```
 
 You should see sel4 booting on the screen where you ran minicom.
 
@@ -94,12 +96,12 @@ The seial test prints ASCII characters to the "telem" port on the odroid daughte
 
 The telem port has a header on the underside of the daugher board (the side that faces the odroid if they are on top of each other) that has easy to access. Looking directoy at the tips of the pins with the top side of the header facing the ground call the left most pin 1 and the right most pin 6. The pinout is as follows:
 
-Pin 1: unused
-pin 2: tx
-pin 3: rx
-pin 4: ground
-pin 5: unused
-pin 6: positive 5 volts.
+Pin 1: unused<br/>
+pin 2: tx<br/>
+pin 3: rx<br/>
+pin 4: ground<br/>
+pin 5: unused<br/>
+pin 6: positive 5 volts<br/>
 
 We used another USB-to-UART adapter to hook up to this header to view the output.
 
