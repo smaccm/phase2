@@ -23,10 +23,13 @@ If you run the main.sh script a symlink called "smaccmpilot" will appear in the 
 
 To load this image make sure that the USB-to-UART adapter is connected to the build machine and the odroid. Go to the your home directory and runthe command:
 
+```
 minicom odroid
+```
 
 Then power on the odroid. Your screen should look like this:
 
+```
 U-Boot 2012.07-g612e625 (Mar 21 2014 - 09:39:54) for Exynos5410
 
 CPU: Exynos5410 Rev2.3 [Samsung SOC on SMP Platform Base on ARM CortexA15]
@@ -68,6 +71,7 @@ ptn 7 name='userdata' start=0x0 len=0x20005B(~-2147389952KB)
 ptn 8 name='cache' start=0x0 len=0x4198E(~275134464KB) 
 ptn 9 name='fat' start=0x0 len=0x3E2E3F(~-122094592KB) 
 USB cable Connected![0x4]
+```
 
 Then in another terminal go to the phase2/camkes/images directory and run the command:
 
