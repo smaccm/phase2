@@ -105,7 +105,7 @@ The serial test
 
 The seial test prints ASCII characters to the "telem" port on the odroid daughterboard. If you send characters to the port it will print them to the debug terminal on the odroid (it will display them in the minicom window).
 
-The telem port has a header on the underside of the daugher board (the side that faces the odroid if they are on top of each other) that has easy to access. Looking directoy at the tips of the pins with the top side of the header facing the ground call the left most pin 1 and the right most pin 6. The pinout is as follows:
+The telem port has a header on the underside of the daughter board (the side that faces the odroid if they are on top of each other) that has easy to access. Looking directory at the tips of the pins with the top side of the header facing the ground call the left most pin 1 and the right most pin 6. The pinout is as follows:
 
 Pin 1: unused<br/>
 pin 2: tx<br/>
@@ -119,7 +119,7 @@ We used another USB-to-UART adapter to hook up to this header to view the output
 The CAN Test
 ===============
 
-The CAN test sends and receives messages on the CAN port and prints them to the debug console.  To run this test you can load the image on two odroid and have them talk to each other through the can port on the odroid daughter board. You can also attach the odroid to some other device as well.
+The CAN test sends and receives messages on the CAN port and prints them to the debug console.  To run this test you can load the image on two odroid and have them talk to each other through the can port on the odroid daughter board. If you have the pixhawk configured to send/receive CAN messages you could also attach it to the odroid to see how they will talk to each other.
 
 
 More detailed documentation
