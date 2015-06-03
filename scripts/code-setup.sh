@@ -37,7 +37,7 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git
+repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
 repo sync
 
 echo "************************************************************"
