@@ -22,7 +22,7 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
-# git checkout feature/tower9
+git checkout feature/tower9
 # git checkout red-team-may-2015
 git submodule update --init
 cd tower-camkes-odroid
