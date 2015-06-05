@@ -5,7 +5,7 @@ ghc:
 
 install:
   - cabal update
-  - cabal install alex happy MissingH data-ordlist split mtl
+  - cabal install alex happy MissingH data-ordlist split
 
 script:
   - cd scripts

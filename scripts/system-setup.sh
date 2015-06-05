@@ -96,6 +96,15 @@ then
     cabal install --global MissingH data-ordlist split mtl
     # Fix permissions caused by running cabal as root
     chown `logname` -R ~/.cabal
+else
+    echo "************************************************************"
+    echo "Update cabal (on travis)"
+    echo "************************************************************"
+
+    sudo -u `logname` cabal update
+    cabal install --global mtl
+    # Fix permissions caused by running cabal as root
+    chown `logname` -R ~/.cabal
 fi
 
 
