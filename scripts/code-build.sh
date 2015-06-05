@@ -22,6 +22,8 @@ echo "************************************************************"
 echo "Build kernel image via camkes"
 echo "************************************************************"
 
+cabal info mtl
+
 cd camkes
 make ${ODROID_APP_NAME}_defconfig
 make
