@@ -9,24 +9,12 @@ fi
 source "variables.sh"
 cd ..
 
-echo "************************************************************"
-echo "Build smaccmpilot"
-echo "************************************************************"
-
-cd smaccmpilot-build/tower-camkes-odroid
-cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME
-make -C $ODROID_APP_NAME
-cd ../..
-
-echo "************************************************************"
-echo "Build kernel image via camkes"
-echo "************************************************************"
-
 cd camkes
-make ${ODROID_APP_NAME}_defconfig
+make vm_defconfig
 make
 
 cd images
+ls
 if [[ -e capdl-loader-experimental-image-arm-exynos5 ]]
 then
     mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image

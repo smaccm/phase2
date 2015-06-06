@@ -12,36 +12,11 @@ cd ..
 BASE_DIR=$PWD
 
 echo "************************************************************"
-echo "Get smaccmpilot code"
-echo "************************************************************"
-
-git clone https://github.com/GaloisInc/smaccmpilot-build.git
-cd smaccmpilot-build
-
-echo "************************************************************"
-echo "Configure smaccmpilot code"
-echo "************************************************************"
-
-git checkout red-team-may-2015
-git submodule update --init
-cd tower-camkes-odroid
-echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
-make create-sandbox
-mkdir $ODROID_APP_NAME
-cd ../..
-
-echo "************************************************************"
 echo "Get camkes code"
 echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/may-drop-odroid-manifest.git -m red-team-may-2015.xml
+repo init -u https://github.com/smaccm/camkes-arm-vm-manifest.git
 repo sync
-
-echo "************************************************************"
-echo "Link in the smaccmpilot app"
-echo "************************************************************"
-
-rm apps/$ODROID_APP_NAME
-ln -s $BASE_DIR/smaccmpilot-build/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODROID_APP_NAME
+sed -i 's/\#include <camkes\/dataport.h>/\#include <camkes\/dataport.h>\n\#define NUM_PACKETS 80/' apps/vm/components/helloworld/src/hello.c
