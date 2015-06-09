@@ -35,7 +35,7 @@ echo "************************************************************"
 
 git clone https://github.com/smaccm/phase2.git $BUILD_DIR_NAME
 cd $BUILD_DIR_NAME
-git checkout red-team-may-2015
+git checkout arm-vm
 
 echo "************************************************************"
 echo "Call subscripts"
