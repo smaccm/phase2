@@ -26,11 +26,11 @@ apt-get update
 apt-get -y install python-software-properties
 do-release-upgrade -f DistUpgradeViewNonInteractive
 
-# add-apt-repository -y ppa:ubuntu-toolchain-r/test
-# add-apt-repository -y ppa:linaro-maintainers/toolchain
+add-apt-repository -y ppa:ubuntu-toolchain-r/test
+add-apt-repository -y ppa:linaro-maintainers/toolchain
 add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 add-apt-repository -y ppa:webupd8team/java
-# add-apt-repository -y ppa:nilarimogard/webupd8
+add-apt-repository -y ppa:nilarimogard/webupd8
 
 
 echo "************************************************************"
