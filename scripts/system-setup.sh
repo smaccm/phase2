@@ -16,6 +16,28 @@ cd ..
 
 
 echo "************************************************************"
+echo "Install Java 8"
+echo "************************************************************"
+
+# we have to do this to say yes to the java 8 license agreement
+echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+
+apt-get -y install python-software-properties software-properties-common
+
+# We getting strange cert errors from this ppa so we install java more directly
+#
+# add-apt-repository -y ppa:webupd8team/java
+# apt-get update
+# apt-get install oracle-java8-installer
+#
+
+apt-get install java-common
+wget http://ppa.launchpad.net/webupd8team/java/ubuntu/pool/main/o/oracle-java8-installer/oracle-java8-installer_8u45+8u33arm-1~webupd8~1_all.deb
+dpkg --install oracle-java8-installer_8u45+8u33arm-1~webupd8~1_all.deb
+
+
+echo "************************************************************"
 echo "Upgrade to Ubuntu 14.04"
 echo "************************************************************"
 
@@ -50,27 +72,6 @@ apt-get -y --force-yes install gcc-4.8 \
                                minicom \
                                android-tools-fastboot
 
-
-echo "************************************************************"
-echo "Install Java 8"
-echo "************************************************************"
-
-# we have to do this to say yes to the java 8 license agreement
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-
-apt-get -y install python-software-properties software-properties-common
-
-# We getting strange cert errors from this ppa so we install java more directly
-#
-# add-apt-repository -y ppa:webupd8team/java
-# apt-get update
-# apt-get install oracle-java8-installer
-#
-
-apt-get install java-common
-wget http://ppa.launchpad.net/webupd8team/java/ubuntu/pool/main/o/oracle-java8-installer/oracle-java8-installer_8u45+8u33arm-1~webupd8~1_all.deb
-dpkg --install oracle-java8-installer_8u45+8u33arm-1~webupd8~1_all.deb
 
 echo "************************************************************"
 echo "Install pip software"
