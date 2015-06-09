@@ -22,6 +22,7 @@ echo "************************************************************"
 # We need to upgrade to Ubuntu 14.04 to get the right version of
 # arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
 # that's what Travis uses
+apt-get update
 apt-get install update-manager-core
 do-release-upgrade -f DistUpgradeViewNonInteractive
 
