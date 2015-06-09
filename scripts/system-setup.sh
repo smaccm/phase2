@@ -14,26 +14,6 @@ fi
 
 cd ..
 
-echo "************************************************************"
-echo "Configure apt"
-echo "************************************************************"
-
-# We need to install the PPAs before upgrading to Ubuntu 14.04 since
-# the upgrade screws with PPAs
-
-# Work around Ubuntu APT bug
-rm -rf /var/lib/apt/lists/*
-
-apt-get update
-apt-get -y install python-software-properties software-properties-common
-add-apt-repository -y ppa:webupd8team/java
-apt-get update
-
-# Many of these are no longer needed with Ubuntu 14.04
-#add-apt-repository -y ppa:ubuntu-toolchain-r/test
-#add-apt-repository -y ppa:linaro-maintainers/toolchain
-#add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
-#add-apt-repository -y ppa:nilarimogard/webupd8
 
 echo "************************************************************"
 echo "Upgrade to Ubuntu 14.04"
@@ -45,15 +25,12 @@ echo "************************************************************"
 apt-get install update-manager-core
 do-release-upgrade -f DistUpgradeViewNonInteractive
 
+
 echo "************************************************************"
 echo "Install apt software"
 echo "************************************************************"
 
 apt-get update
-
-# we have to do this to say yes to the java 8 license agreement
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
 apt-get -y --force-yes install gcc-4.8 \
                                git \
@@ -68,14 +45,31 @@ apt-get -y --force-yes install gcc-4.8 \
                                python-pip \
                                libxml2-utils \
                                gcc-arm-none-eabi \
-                               oracle-java8-installer \
                                u-boot-tools \
                                minicom \
                                android-tools-fastboot
 
-# Not needed with Ubuntu 14.04
-# update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
+echo "************************************************************"
+echo "Install Java 8"
+echo "************************************************************"
+
+# we have to do this to say yes to the java 8 license agreement
+echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+
+apt-get -y install python-software-properties software-properties-common
+
+# We getting strange cert errors from this ppa so we install java more directly
+#
+# add-apt-repository -y ppa:webupd8team/java
+# apt-get update
+# apt-get install oracle-java8-installer
+#
+
+apt-get install java-common
+wget http://ppa.launchpad.net/webupd8team/java/ubuntu/pool/main/o/oracle-java8-installer/oracle-java8-installer_8u45+8u33arm-1~webupd8~1_all.deb
+dpkg --install oracle-java8-installer_8u45+8u33arm-1~webupd8~1_all.deb
 
 echo "************************************************************"
 echo "Install pip software"
