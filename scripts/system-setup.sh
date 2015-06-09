@@ -88,7 +88,7 @@ then
     echo "************************************************************"
 
     HASKELL_TARBALL=haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz
-    wget --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
+    wget --no-check-certificate --progress=dot:mega https://www.haskell.org/platform/download/2014.2.0.0/$HASKELL_TARBALL
     tar -xzf $HASKELL_TARBALL --directory /
     /usr/local/haskell/ghc-7.8.3-x86_64/bin/activate-hs
 
