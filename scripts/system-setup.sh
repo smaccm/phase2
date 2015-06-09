@@ -27,6 +27,7 @@ rm -rf /var/lib/apt/lists/*
 apt-get update
 apt-get -y install python-software-properties software-properties-common
 add-apt-repository -y ppa:webupd8team/java
+apt-get update
 
 # Many of these are no longer needed with Ubuntu 14.04
 #add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -34,19 +35,15 @@ add-apt-repository -y ppa:webupd8team/java
 #add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 #add-apt-repository -y ppa:nilarimogard/webupd8
 
-# On travis do-release-upgrade needs to be done in the .travis.yml
-if [[ "$TRAVIS" != true ]]
-then
-    echo "************************************************************"
-    echo "Upgrade to Ubuntu 14.04"
-    echo "************************************************************"
+echo "************************************************************"
+echo "Upgrade to Ubuntu 14.04"
+echo "************************************************************"
 
-    # We need to upgrade to Ubuntu 14.04 to get the right version of
-    # arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
-    # that's what Travis uses
-
-    do-release-upgrade -f DistUpgradeViewNonInteractive
-fi
+# We need to upgrade to Ubuntu 14.04 to get the right version of
+# arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
+# that's what Travis uses
+apt-get install update-manager-core
+do-release-upgrade -f DistUpgradeViewNonInteractive
 
 echo "************************************************************"
 echo "Install apt software"

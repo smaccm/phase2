@@ -7,7 +7,6 @@ install:
   - cabal update
   - cabal install alex happy MissingH data-ordlist split mtl
   - cabal install mtl
-  - do-release-upgrade -f DistUpgradeViewNonInteractive
 
 script:
   - cd scripts
