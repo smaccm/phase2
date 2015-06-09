@@ -34,15 +34,19 @@ add-apt-repository -y ppa:webupd8team/java
 #add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 #add-apt-repository -y ppa:nilarimogard/webupd8
 
-echo "************************************************************"
-echo "Upgrade to Ubuntu 14.04"
-echo "************************************************************"
+# On travis do-release-upgrade needs to be done in the .travis.yml
+if [[ "$TRAVIS" != true ]]
+then
+    echo "************************************************************"
+    echo "Upgrade to Ubuntu 14.04"
+    echo "************************************************************"
 
-# We need to upgrade to Ubuntu 14.04 to get the right version of
-# arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
-# that's what Travis uses
+    # We need to upgrade to Ubuntu 14.04 to get the right version of
+    # arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
+    # that's what Travis uses
 
-do-release-upgrade -f DistUpgradeViewNonInteractive
+    do-release-upgrade -f DistUpgradeViewNonInteractive
+fi
 
 echo "************************************************************"
 echo "Install apt software"
