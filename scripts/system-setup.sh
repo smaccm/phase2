@@ -14,23 +14,15 @@ fi
 
 cd ..
 
-
-# We need to upgrade to Ubuntu 14.04 to get the right version of
-# arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
-# that's what Travis uses
-
-echo "************************************************************"
-echo "Upgrade to Ubuntu 14.04"
-echo "************************************************************"
-
-do-release-upgrade -f DistUpgradeViewNonInteractive
-
 echo "************************************************************"
 echo "Configure apt"
 echo "************************************************************"
 
-# Work around Ubuntu APT bug (no longer needed with Ubuntu 14.04?)
-# rm -rf /var/lib/apt/lists/*
+# We need to install the PPAs before upgrading to Ubuntu 14.04 since
+# the upgrade screws with PPAs
+
+# Work around Ubuntu APT bug
+rm -rf /var/lib/apt/lists/*
 
 apt-get update
 apt-get -y install python-software-properties software-properties-common
@@ -42,6 +34,15 @@ add-apt-repository -y ppa:webupd8team/java
 #add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
 #add-apt-repository -y ppa:nilarimogard/webupd8
 
+echo "************************************************************"
+echo "Upgrade to Ubuntu 14.04"
+echo "************************************************************"
+
+# We need to upgrade to Ubuntu 14.04 to get the right version of
+# arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
+# that's what Travis uses
+
+do-release-upgrade -f DistUpgradeViewNonInteractive
 
 echo "************************************************************"
 echo "Install apt software"
