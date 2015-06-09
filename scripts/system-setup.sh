@@ -15,22 +15,32 @@ fi
 cd ..
 
 
+# We need to upgrade to Ubuntu 14.04 to get the right version of
+# arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
+# that's what Travis uses
+
+echo "************************************************************"
+echo "Upgrade to Ubuntu 14.04"
+echo "************************************************************"
+
+do-release-upgrade -f DistUpgradeViewNonInteractive
+
 echo "************************************************************"
 echo "Configure apt"
 echo "************************************************************"
 
-# Work around Ubuntu APT bug
-rm -rf /var/lib/apt/lists/*
+# Work around Ubuntu APT bug (no longer needed with Ubuntu 14.04?)
+# rm -rf /var/lib/apt/lists/*
 
 apt-get update
-apt-get -y install python-software-properties
-do-release-upgrade -f DistUpgradeViewNonInteractive
-
-add-apt-repository -y ppa:ubuntu-toolchain-r/test
-add-apt-repository -y ppa:linaro-maintainers/toolchain
-add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
+apt-get -y install python-software-properties software-properties-common
 add-apt-repository -y ppa:webupd8team/java
-add-apt-repository -y ppa:nilarimogard/webupd8
+
+# Many of these are no longer needed with Ubuntu 14.04
+#add-apt-repository -y ppa:ubuntu-toolchain-r/test
+#add-apt-repository -y ppa:linaro-maintainers/toolchain
+#add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
+#add-apt-repository -y ppa:nilarimogard/webupd8
 
 
 echo "************************************************************"
@@ -47,7 +57,6 @@ apt-get -y --force-yes install gcc-4.8 \
                                git \
                                libgmp3-dev \
                                zlib1g-dev \
-                               software-properties-common \
                                make \
                                libtinfo-dev \
                                libncurses5-dev \
@@ -62,7 +71,8 @@ apt-get -y --force-yes install gcc-4.8 \
                                minicom \
                                android-tools-fastboot
 
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
+# Not needed with Ubuntu 14.04
+# update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
 
 echo "************************************************************"
