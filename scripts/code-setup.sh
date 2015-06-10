@@ -17,6 +17,6 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/camkes-arm-vm-manifest.git
+repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
 repo sync
-sed -i 's/\#include <camkes\/dataport.h>/\#include <camkes\/dataport.h>\n\#define NUM_PACKETS 80/' apps/vm/components/helloworld/src/hello.c
+

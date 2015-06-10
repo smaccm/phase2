@@ -10,7 +10,7 @@ source "variables.sh"
 cd ..
 
 cd camkes
-make vm_defconfig
+make camera_vm_defconfig
 make
 
 cd images
