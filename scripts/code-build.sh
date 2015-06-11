@@ -14,9 +14,12 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/tower-camkes-odroid
-cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME
+#cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME
+cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME --lib-dir=ivory_serial
 make -C $ODROID_APP_NAME
-cd ../..
+cd $ODROID_APP_NAME
+sed -i.old 's/.*void callback_/\/\/ callback_/' $(find . -name "smaccm_*.h")
+cd ../../..
 
 echo "************************************************************"
 echo "Build kernel image via camkes"
@@ -25,6 +28,7 @@ echo "************************************************************"
 cabal info mtl
 
 cd camkes
+ln -s ../../smaccmpilot-build/tower-camkes-odroid/smaccmpilot/libivory_serial libs/libivory_serial
 make ${ODROID_APP_NAME}_defconfig
 make
 
