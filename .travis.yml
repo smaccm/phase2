@@ -3,9 +3,18 @@ language: haskell
 ghc:
   - 7.8
 
+# Guide for using Cabal 1.22 on Travis:
+# http://snak.tumblr.com/post/99304135792/using-cabal-install-1-20-on-travis-ci
+
 install:
+  - travis_retry sudo add-apt-repository -y ppa:hvr/ghc
+  - travis_retry sudo apt-get update
+  - travis_retry sudo apt-get install --force-yes cabal-install-1.22
+  - export PATH=/opt/cabal/1.22/bin:$PATH
   - cabal update
-  - cabal install alex happy MissingH data-ordlist split mtl
+  - cabal install Cabal
+  - cabal install --only-dependencies --enable-tests --reorder-goals
+  - cabal install alex happy MissingH data-ordlist split
   - cabal install mtl
 
 script:
