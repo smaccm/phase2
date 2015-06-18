@@ -49,7 +49,7 @@ apt-get update
 # Manually works more reliably than using do-release-upgrade
 sed -i -e 's/precise/trusty/g' /etc/apt/sources.list
 apt-get update
-apt-get dist-upgrade
+yes | apt-get -y dist-upgrade
 
 
 echo "************************************************************"
