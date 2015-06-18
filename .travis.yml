@@ -11,7 +11,3 @@ install:
 script:
   - cd scripts
   - ./main.sh
-
-env:
-  - TOWER_APP_NAME=serial-test
-  - TOWER_APP_NAME=can-test

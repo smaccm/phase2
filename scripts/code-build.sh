@@ -13,22 +13,20 @@ echo "************************************************************"
 echo "Build smaccmpilot"
 echo "************************************************************"
 
-cd smaccmpilot-build/tower-camkes-odroid
-#cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME
-cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME --lib-dir=ivory_serial
-make -C $ODROID_APP_NAME
+cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+make test-odroid
 cd $ODROID_APP_NAME
-sed -i.old 's/.*void callback_/\/\/ callback_/' $(find . -name "smaccm_*.h")
-cd ../../..
+make
+sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
+rm $BASE_DIR/camkes/libs/libsmaccmpilot
+ln -s $ODROID_APP_NAME/libsmaccmpilot $BASE_DIR/camkes/libs
+cd $BASE_DIR
 
 echo "************************************************************"
 echo "Build kernel image via camkes"
 echo "************************************************************"
 
-cabal info mtl
-
 cd camkes
-ln -s ../../smaccmpilot-build/tower-camkes-odroid/smaccmpilot/libivory_serial libs/libivory_serial
 make ${ODROID_APP_NAME}_defconfig
 make
 

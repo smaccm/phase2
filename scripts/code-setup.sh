@@ -23,13 +23,12 @@ echo "Configure smaccmpilot code"
 echo "************************************************************"
 
 git checkout feature/tower9
-# git checkout red-team-may-2015
 git submodule update --init
-cd tower-camkes-odroid
+cd smaccmpilot-stm32f4/src/smaccm-flight/
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
 make create-sandbox
 mkdir $ODROID_APP_NAME
-cd ../..
+cd $BASE_DIR
 
 echo "************************************************************"
 echo "Get camkes code"
@@ -44,5 +43,5 @@ echo "************************************************************"
 echo "Link in the smaccmpilot app"
 echo "************************************************************"
 
-rm apps/$ODROID_APP_NAME
-ln -s $BASE_DIR/smaccmpilot-build/tower-camkes-odroid/$ODROID_APP_NAME apps/$ODROID_APP_NAME
+rm apps/can_proxy_odroid_test
+ln -s $BASE_DIR/smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight/$ODROID_APP_NAME apps/$ODROID_APP_NAME
