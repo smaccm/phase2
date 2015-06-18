@@ -9,6 +9,8 @@ fi
 source "variables.sh"
 cd ..
 
+BASE_DIR=$PWD
+
 echo "************************************************************"
 echo "Build smaccmpilot"
 echo "************************************************************"
@@ -19,7 +21,7 @@ cd $ODROID_APP_NAME
 make
 sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
 rm $BASE_DIR/camkes/libs/libsmaccmpilot
-ln -s $ODROID_APP_NAME/libsmaccmpilot $BASE_DIR/camkes/libs
+ln -s $BASE_DIR/camkes/apps/$ODROID_APP_NAME/libsmaccmpilot $BASE_DIR/camkes/libs
 cd $BASE_DIR
 
 echo "************************************************************"
