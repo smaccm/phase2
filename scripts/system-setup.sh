@@ -46,7 +46,7 @@ echo "************************************************************"
 # that's what Travis uses
 apt-get update
 apt-get install update-manager-core
-yes | do-release-upgrade -f DistUpgradeViewNonInteractive
+do-release-upgrade -f DistUpgradeViewNonInteractive
 
 
 echo "************************************************************"
