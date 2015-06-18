@@ -45,11 +45,8 @@ echo "************************************************************"
 # arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
 # that's what Travis uses
 apt-get update
-
-# Manually works more reliably than using do-release-upgrade
-sed -i -e 's/precise/trusty/g' /etc/apt/sources.list
-apt-get update
-yes | apt-get -y dist-upgrade
+apt-get install update-manager-core
+do-release-upgrade -f DistUpgradeViewNonInteractive
 
 
 echo "************************************************************"
