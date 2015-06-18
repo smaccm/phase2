@@ -22,8 +22,9 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
-git checkout feature/tower9
+# git checkout feature/tower9
 # git checkout red-team-may-2015
+git checkout 6104dadc26db9647e9d978634ab860c1a14eadfa
 git submodule update --init
 cd tower-camkes-odroid
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
