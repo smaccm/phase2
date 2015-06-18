@@ -17,6 +17,8 @@ echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
 make test-odroid
+rm -rf $BASE_DIR/camkes/apps/$ODROID_APP_NAME
+cp -r $ODROID_APP_NAME $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 make
 sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
