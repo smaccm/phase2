@@ -47,6 +47,12 @@ echo "************************************************************"
 apt-get update
 apt-get install update-manager-core
 do-release-upgrade -f DistUpgradeViewNonInteractive
+if [[ "$TRAVIS" != true ]]
+then
+    # do-release-upgrade tends to die on Travis.
+    # This will hopefully handle that.
+    dpkg --configure -a
+fi
 
 
 echo "************************************************************"
