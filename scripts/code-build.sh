@@ -17,11 +17,9 @@ echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
 make test-odroid
-cd $ODROID_APP_NAME
+cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 make
 sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
-rm $BASE_DIR/camkes/libs/libsmaccmpilot
-ln -s $BASE_DIR/camkes/apps/$ODROID_APP_NAME/libsmaccmpilot $BASE_DIR/camkes/libs
 cd $BASE_DIR
 
 echo "************************************************************"
