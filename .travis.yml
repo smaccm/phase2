@@ -12,8 +12,6 @@ install:
   - travis_retry sudo apt-get install --force-yes cabal-install-1.22
   - export PATH=/opt/cabal/1.22/bin:$PATH
   - cabal update
-  - cabal install Cabal
-  - cabal install --only-dependencies --enable-tests --reorder-goals
   - cabal install alex happy MissingH data-ordlist split
   - cabal install mtl
 
