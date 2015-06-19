@@ -22,27 +22,27 @@ echo "************************************************************"
 # Work around Ubuntu APT bug
 rm -rf /var/lib/apt/lists/*
 
-apt-get update
-apt-get -y install python-software-properties
+time apt-get update
+time apt-get -y install python-software-properties
 
-add-apt-repository -y ppa:ubuntu-toolchain-r/test
-add-apt-repository -y ppa:linaro-maintainers/toolchain
-add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
-add-apt-repository -y ppa:webupd8team/java
-add-apt-repository -y ppa:nilarimogard/webupd8
+time add-apt-repository -y ppa:ubuntu-toolchain-r/test
+time add-apt-repository -y ppa:linaro-maintainers/toolchain
+time add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
+time add-apt-repository -y ppa:webupd8team/java
+time add-apt-repository -y ppa:nilarimogard/webupd8
 
 
 echo "************************************************************"
 echo "Install apt software"
 echo "************************************************************"
 
-apt-get update
+time apt-get update
 
 # we have to do this to say yes to the java 8 license agreement
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
-apt-get -y --force-yes install gcc-4.8 \
+time apt-get -y --force-yes install gcc-4.8 \
                                git \
                                libgmp3-dev \
                                zlib1g-dev \
@@ -68,9 +68,9 @@ echo "************************************************************"
 echo "Install pip software"
 echo "************************************************************"
 
-pip install --upgrade pip
-hash -r
-pip install jinja2 ply pyelftools
+time pip install --upgrade pip
+time hash -r
+time pip install jinja2 ply pyelftools
 
 
 # Installing cabal and cabal-install on Travis exceeds memory bound
@@ -104,8 +104,8 @@ echo "************************************************************"
 echo "Get and install repo"
 echo "************************************************************"
 
-curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo
-chmod 755 /usr/local/bin/repo
+time curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo
+time chmod 755 /usr/local/bin/repo
 
 
 echo "************************************************************"

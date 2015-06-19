@@ -16,11 +16,11 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
-make test-odroid
+time make test-odroid
 rm -rf $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cp -r $ODROID_APP_NAME $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
-make
+time make
 sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
 cd $BASE_DIR
 
@@ -29,8 +29,9 @@ echo "Build kernel image via camkes"
 echo "************************************************************"
 
 cd camkes
-make ${ODROID_APP_NAME}_defconfig
-make
+time make ${ODROID_APP_NAME}_defconfig
+date
+time make
 
 cd images
 if [[ -e capdl-loader-experimental-image-arm-exynos5 ]]

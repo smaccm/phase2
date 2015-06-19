@@ -9,6 +9,8 @@
 #
 ###########################################################################
 
+date
+
 (exec sudo "./system-setup.sh")
 (exec "./code-setup.sh")
 (exec "./code-build.sh")

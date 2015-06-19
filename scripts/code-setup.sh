@@ -15,7 +15,7 @@ echo "************************************************************"
 echo "Get smaccmpilot code"
 echo "************************************************************"
 
-git clone https://github.com/GaloisInc/smaccmpilot-build.git
+time git clone https://github.com/GaloisInc/smaccmpilot-build.git
 cd smaccmpilot-build
 
 echo "************************************************************"
@@ -23,9 +23,9 @@ echo "Configure smaccmpilot code"
 echo "************************************************************"
 
 git checkout feature/tower9
-git submodule update --init
+time git submodule update --init
 cd smaccmpilot-stm32f4/src/smaccm-flight/
-make create-sandbox
+time make create-sandbox
 mkdir $ODROID_APP_NAME
 cd $BASE_DIR
 
@@ -35,8 +35,8 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
-repo sync
+time repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
+time repo sync
 
 cd apps
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
