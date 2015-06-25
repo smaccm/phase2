@@ -5,13 +5,12 @@ ghc:
 
 install:
   - cabal update
-  - cabal install alex happy MissingH data-ordlist split mtl
+  - cabal install cabal-install
+  - cabal install alex happy MissingH data-ordlist split
   - cabal install mtl
 
 script:
+  - ghc --version
+  - cabal --version
   - cd scripts
   - ./main.sh
-
-env:
-  - TOWER_APP_NAME=serial-test
-  - TOWER_APP_NAME=can-test

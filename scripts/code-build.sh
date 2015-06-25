@@ -9,24 +9,29 @@ fi
 source "variables.sh"
 cd ..
 
+BASE_DIR=$PWD
+
 echo "************************************************************"
 echo "Build smaccmpilot"
 echo "************************************************************"
 
-cd smaccmpilot-build/tower-camkes-odroid
-cabal run $TOWER_APP_NAME -- --src-dir=$ODROID_APP_NAME
-make -C $ODROID_APP_NAME
-cd ../..
+cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+time make test-odroid
+rm -rf $BASE_DIR/camkes/apps/$ODROID_APP_NAME
+cp -r $ODROID_APP_NAME $BASE_DIR/camkes/apps/$ODROID_APP_NAME
+cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
+time make
+sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
+cd $BASE_DIR
 
 echo "************************************************************"
 echo "Build kernel image via camkes"
 echo "************************************************************"
 
-cabal info mtl
-
 cd camkes
-make ${ODROID_APP_NAME}_defconfig
-make
+time make ${ODROID_APP_NAME}_defconfig
+date
+time make
 
 cd images
 if [[ -e capdl-loader-experimental-image-arm-exynos5 ]]
