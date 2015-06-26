@@ -21,7 +21,7 @@ rm -rf $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cp -r $ODROID_APP_NAME $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 time make
-sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
+# sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
 cd $BASE_DIR
 
 echo "************************************************************"
