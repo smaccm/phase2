@@ -24,6 +24,7 @@ then
     exit 1
 fi
 mv image $BASE_DIR/pixhawk-image
+cd ../..
 
 make smaccmpilot-odroid
 rm -rf $BASE_DIR/camkes/apps/smaccmpilot
