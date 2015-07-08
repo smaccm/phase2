@@ -15,6 +15,16 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+
+make platform-fmu24/can-server-test-gen
+cd platform-fmu24/can-server-test
+if [[ ! -e image ]]
+then
+    echo "Failed to build Pixhawk image"
+    exit 1
+fi
+mv image $BASE_DIR/pixhawk-image
+
 make smaccmpilot-odroid
 rm -rf $BASE_DIR/camkes/apps/smaccmpilot
 cp -r smaccmpilot $BASE_DIR/camkes/apps/smaccmpilot
@@ -38,10 +48,12 @@ fi
 
 if [[ ! -e odroid-image ]]
 then
-    echo "Failed to build odroid-image"
+    echo "Failed to build ODROID image"
     exit 1
 fi
+mv odroid-image $BASE_DIR/odroid-image
 
 echo "************************************************************"
-echo "Odroid image: $PWD/odroid-image"
+echo "Pixhawk image: $BASE_DIR/pixhawk-image"
+echo "ODROID image: $BASE_DIR/odroid-image"
 echo "************************************************************"
