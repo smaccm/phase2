@@ -26,7 +26,7 @@ echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-se
 apt-get -y install python-software-properties software-properties-common
 add-apt-repository -y ppa:webupd8team/java
 apt-get update
-apt-get install oracle-java8-installer
+apt-get -y install oracle-java8-installer
 
 
 echo "************************************************************"
