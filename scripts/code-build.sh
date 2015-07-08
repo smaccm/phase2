@@ -16,7 +16,9 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
-time make test-odroid
+# time make test-odroid
+# time make smaccmpilot-odroid
+time make can_proxy_odroid_test
 rm -rf $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cp -r $ODROID_APP_NAME $BASE_DIR/camkes/apps/$ODROID_APP_NAME
 cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
