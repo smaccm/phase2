@@ -43,6 +43,7 @@ if [[ "$TRAVIS" == true ]]
 then
     # do-release-upgrade tends to die on Travis.
     # This will hopefully handle that.
+    rm /var/lib/dpkg/lock
     dpkg --configure -a
 fi
 
