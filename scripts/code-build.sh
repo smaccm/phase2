@@ -6,7 +6,6 @@ then
     exit 1
 fi
 
-source "variables.sh"
 cd ..
 
 BASE_DIR=$PWD
@@ -16,14 +15,11 @@ echo "Build smaccmpilot"
 echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
-# time make test-odroid
-# time make smaccmpilot-odroid
-time make can_proxy_odroid_test
-rm -rf $BASE_DIR/camkes/apps/$ODROID_APP_NAME
-cp -r $ODROID_APP_NAME $BASE_DIR/camkes/apps/$ODROID_APP_NAME
-cd $BASE_DIR/camkes/apps/$ODROID_APP_NAME
-time make
-# sed -i.old 's|.*void callback_|//&|' $(find . -name "smaccm_*.h")
+make smaccmpilot-odroid
+rm -rf $BASE_DIR/camkes/apps/smaccmpilot
+cp -r smaccmpilot $BASE_DIR/camkes/apps/smaccmpilot
+cd $BASE_DIR/camkes/apps/smaccmpilot
+make
 cd $BASE_DIR
 
 echo "************************************************************"
@@ -31,9 +27,8 @@ echo "Build kernel image via camkes"
 echo "************************************************************"
 
 cd camkes
-time make ${ODROID_APP_NAME}_defconfig
-date
-time make
+make smaccmpilot_defconfig
+make
 
 cd images
 if [[ -e capdl-loader-experimental-image-arm-exynos5 ]]

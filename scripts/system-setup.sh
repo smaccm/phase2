@@ -16,37 +16,47 @@ cd ..
 
 
 echo "************************************************************"
-echo "Configure apt"
+echo "Install Java 8"
 echo "************************************************************"
 
-# Work around Ubuntu APT bug
-rm -rf /var/lib/apt/lists/*
+# we have to do this to say yes to the java 8 license agreement
+echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
-time apt-get update
-time apt-get -y install python-software-properties
+apt-get -y install python-software-properties software-properties-common
+add-apt-repository -y ppa:webupd8team/java
+apt-get update
+apt-get install oracle-java8-installer
 
-time add-apt-repository -y ppa:ubuntu-toolchain-r/test
-time add-apt-repository -y ppa:linaro-maintainers/toolchain
-time add-apt-repository -y ppa:terry.guo/gcc-arm-embedded
-time add-apt-repository -y ppa:webupd8team/java
-time add-apt-repository -y ppa:nilarimogard/webupd8
+
+echo "************************************************************"
+echo "Upgrade to Ubuntu 14.04"
+echo "************************************************************"
+
+# We need to upgrade to Ubuntu 14.04 to get the right version of
+# arm-linux-gnueabi-gcc (4.7.3) but we start with Ubuntu 12.04 since
+# that's what Travis uses
+apt-get update
+apt-get install update-manager-core
+do-release-upgrade -f DistUpgradeViewNonInteractive
+if [[ "$TRAVIS" == true ]]
+then
+    # do-release-upgrade tends to die on Travis.
+    # This will hopefully handle that.
+    dpkg --configure -a
+fi
 
 
 echo "************************************************************"
 echo "Install apt software"
 echo "************************************************************"
 
-time apt-get update
+apt-get update
 
-# we have to do this to say yes to the java 8 license agreement
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-
-time apt-get -y --force-yes install gcc-4.8 \
+apt-get -y --force-yes install gcc-4.8 \
                                git \
                                libgmp3-dev \
                                zlib1g-dev \
-                               software-properties-common \
                                make \
                                libtinfo-dev \
                                libncurses5-dev \
@@ -56,12 +66,9 @@ time apt-get -y --force-yes install gcc-4.8 \
                                python-pip \
                                libxml2-utils \
                                gcc-arm-none-eabi \
-                               oracle-java8-installer \
                                u-boot-tools \
                                minicom \
                                android-tools-fastboot
-
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
 
 
 echo "************************************************************"

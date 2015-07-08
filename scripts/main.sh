@@ -9,11 +9,11 @@
 #
 ###########################################################################
 
-date
-
 (exec sudo "./system-setup.sh")
 (exec "./code-setup.sh")
 (exec "./code-build.sh")
+
+# TODO: Check for pixhawk image
 
 if [[ ! -e ../camkes/images/odroid-image ]]
 then

@@ -6,7 +6,6 @@ then
     exit 1
 fi
 
-source "variables.sh"
 cd ..
 
 BASE_DIR=$PWD
@@ -23,10 +22,9 @@ echo "Configure smaccmpilot code"
 echo "************************************************************"
 
 git checkout feature/tower9
-time git submodule update --init
-cd smaccmpilot-stm32f4/src/smaccm-flight/
-time make create-sandbox
-mkdir $ODROID_APP_NAME
+git submodule update --init
+cd smaccmpilot-stm32f4/src/smaccm-flight
+make create-sandbox
 cd $BASE_DIR
 
 echo "************************************************************"
@@ -35,8 +33,9 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-time repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
-time repo sync
+repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
+repo sync
 
 cd apps
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
+

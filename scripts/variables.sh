@@ -1,1 +1,0 @@
-ODROID_APP_NAME=can_proxy_odroid_test
