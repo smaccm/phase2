@@ -47,7 +47,6 @@ Dpkg::Options {
    "--force-confold";
 }
 EOF
-fi
 
 export DEBIAN_FRONTEND=noninteractive
 do-release-upgrade -f DistUpgradeViewNonInteractive
