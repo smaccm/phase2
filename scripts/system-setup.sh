@@ -42,10 +42,14 @@ apt-get install update-manager-core
 # Workaround for conf files during upgrade
 # http://ubuntuforums.org/showthread.php?t=2265877
 cat >/etc/apt/apt.conf.d/local <<EOF
-DPkg::options { "--force-confdef"; "--force-confnew"; }
+Dpkg::Options {
+   "--force-confdef";
+   "--force-confold";
+}
 EOF
 fi
 
+export DEBIAN_FRONTEND=noninteractive
 do-release-upgrade -f DistUpgradeViewNonInteractive
 
 if [[ "$TRAVIS" == true ]]
