@@ -6,7 +6,7 @@ ghc:
 before_install:
   - sudo apt-get update
   - sudo apt-get install update-manager-core
-  - yes | sudo do-release-upgrade
+  - sudo do-release-upgrade -f DistUpgradeViewNonInteractive
 
 install:
   - cabal update
