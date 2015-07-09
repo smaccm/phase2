@@ -13,13 +13,13 @@
 (exec "./code-setup.sh")
 (exec "./code-build.sh")
 
-if [[ ! -e pixhawk-image ]]
+if [[ ! -e ../pixhawk-image ]]
 then
     echo "Failed to build Pixhawk image"
     exit 1
 fi
 
-if [[ ! -e odroid-image ]]
+if [[ ! -e ../odroid-image ]]
 then
     echo "Failed to build ODROID image"
     exit 1
