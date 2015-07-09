@@ -3,6 +3,10 @@ language: haskell
 ghc:
   - 7.8
 
+before_install:
+  - sudo apt-get install update-manager-core
+  - sudo do-release-upgrade
+
 install:
   - cabal update
   - cabal install alex happy MissingH data-ordlist split mtl
