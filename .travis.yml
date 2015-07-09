@@ -6,7 +6,7 @@ ghc:
 before_install:
   - sudo apt-get update
   - sudo apt-get install update-manager-core
-  - sudo do-release-upgrade
+  - yes | sudo do-release-upgrade
 
 install:
   - cabal update
