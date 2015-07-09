@@ -6,7 +6,7 @@ ghc:
 before_install:
   - sudo sed -i -e 's/precise/trusty/g' /etc/apt/sources.list
   - sudo apt-get update
-  - sudo apt-get upgrade
+  - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 
 install:
   - cabal update
