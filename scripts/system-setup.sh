@@ -39,26 +39,24 @@ echo "************************************************************"
 apt-get update
 apt-get install update-manager-core
 
-if [[ "$TRAVIS" == true ]]
-then
-    # Workaround for conf files during upgrade
-    # http://ubuntuforums.org/showthread.php?t=2265877
+# Workaround for conf files during upgrade
+# http://ubuntuforums.org/showthread.php?t=2265877
 cat >/etc/apt/apt.conf.d/local <<EOF
 DPkg::options { "--force-confdef"; "--force-confnew"; }
 EOF
 fi
 
 do-release-upgrade -f DistUpgradeViewNonInteractive
+
 if [[ "$TRAVIS" == true ]]
 then
-    rm /etc/apt/apt.conf.d/local
-    
     # do-release-upgrade tends to die on Travis.
     # This will hopefully handle that.
     rm /var/lib/dpkg/lock
     dpkg --configure -a
 fi
 
+rm /etc/apt/apt.conf.d/local
 
 echo "************************************************************"
 echo "Install apt software"
