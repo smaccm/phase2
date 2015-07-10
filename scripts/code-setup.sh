@@ -8,13 +8,19 @@ fi
 
 cd ..
 
+if [[ $TRAVIS != "true" ]]
+then
+    export PATH=`cat PATH`
+fi
+
 BASE_DIR=$PWD
+
 
 echo "************************************************************"
 echo "Get smaccmpilot code"
 echo "************************************************************"
 
-time git clone https://github.com/GaloisInc/smaccmpilot-build.git
+git clone https://github.com/GaloisInc/smaccmpilot-build.git
 cd smaccmpilot-build
 
 echo "************************************************************"
@@ -33,8 +39,8 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
-repo sync
+../repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
+../repo sync
 
 cd apps
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk

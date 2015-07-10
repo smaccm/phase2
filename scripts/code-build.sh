@@ -8,6 +8,11 @@ fi
 
 cd ..
 
+if [[ $TRAVIS != "true" ]]
+then
+    export PATH=`cat PATH`
+fi
+
 BASE_DIR=$PWD
 
 echo "************************************************************"
@@ -42,9 +47,12 @@ make smaccmpilot_defconfig
 make
 
 cd images
-if [[ -e capdl-loader-experimental-image-arm-exynos5 ]]
+if [[ $TRAVIS != "true" ]]
 then
     mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d capdl-loader-experimental-image-arm-exynos5 odroid-image
+else
+    # Travis doesn't have mkimage yet, so fake it
+    mv capdl-loader-experimental-image-arm-exynos5 odroid-image
 fi
 
 if [[ ! -e odroid-image ]]
@@ -58,3 +66,5 @@ echo "************************************************************"
 echo "Pixhawk image: $BASE_DIR/pixhawk-image"
 echo "ODROID image: $BASE_DIR/odroid-image"
 echo "************************************************************"
+
+

@@ -22,4 +22,4 @@ echo "Syncing camkes"
 echo "************************************************************"
 
 cd camkes
-repo sync
+../repo sync

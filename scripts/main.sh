@@ -9,7 +9,12 @@
 #
 ###########################################################################
 
-(exec sudo "./system-setup.sh")
+if [[ $TRAVIS != "true" ]]
+then
+    (exec sudo "./travis.sh")
+fi
+
+(exec "./system-setup.sh")
 (exec "./code-setup.sh")
 (exec "./code-build.sh")
 

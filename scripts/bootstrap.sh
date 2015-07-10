@@ -5,7 +5,7 @@
 # image for the pixhawk.
 #
 # This script should work on freshly installed Ubuntu 12.04 amd64 server
-# edition with at least 20gb hard-drive space. If your system already
+# edition with at least 50gb hard-drive space. If your system already
 # has git and the phase2 repository, then you can just run the 'main.sh'
 # script from within the phase2 repository instead.
 #
