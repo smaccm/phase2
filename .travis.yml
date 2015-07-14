@@ -25,6 +25,7 @@ addons:
       - python-pip
       - libxml2-utils
       - uboot-mkimage
+      - python2.7-dev
 
 before_install:
   - mkdir -p gcc-arm-embedded
