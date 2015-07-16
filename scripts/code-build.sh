@@ -7,13 +7,14 @@ then
 fi
 
 cd ..
+BASE_DIR=$PWD
+set -e
 
 if [[ $TRAVIS != "true" ]]
 then
     export PATH=`cat PATH`
 fi
 
-BASE_DIR=$PWD
 
 echo "************************************************************"
 echo "Build smaccmpilot"
