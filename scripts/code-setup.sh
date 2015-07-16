@@ -39,8 +39,8 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-../repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git
-../repo sync
+../repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git || true
+../repo sync || true
 
 cd apps
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
