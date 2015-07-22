@@ -8,7 +8,7 @@ fi
 
 cd ..
 
-if [[ $TRAVIS != "true" ]]
+if [[ $TRAVIS != "true" ]] && [ -e "PATH" ];
 then
     export PATH=`cat PATH`
 fi
