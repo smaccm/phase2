@@ -27,7 +27,7 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
-git checkout feature/tower9
+# git checkout feature/tower9
 git submodule update --init
 cd smaccmpilot-stm32f4/src/smaccm-flight
 make create-sandbox
