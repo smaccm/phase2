@@ -10,7 +10,7 @@ cd ..
 BASE_DIR=$PWD
 set -e
 
-if [[ $TRAVIS != "true" ]]
+if [[ $TRAVIS != "true" ]] && [ -e "PATH" ];
 then
     export PATH=`cat PATH`
 fi

@@ -10,7 +10,7 @@ cd ..
 BASE_DIR=$PWD
 set -e
 
-if [[ $TRAVIS != "true" ]]
+if [[ $TRAVIS != "true" ]] && [ -e "PATH" ];
 then
     export PATH=`cat PATH`
 fi
@@ -27,7 +27,6 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
-git checkout feature/tower9
 git submodule update --init
 cd smaccmpilot-stm32f4/src/smaccm-flight
 make create-sandbox
@@ -39,8 +38,8 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-../repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git || true
-../repo sync || true
+repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git -m phase2.xml || true
+repo sync || true
 
 cd apps
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
