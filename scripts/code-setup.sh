@@ -27,7 +27,6 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
-# git checkout feature/tower9
 git submodule update --init
 cd smaccmpilot-stm32f4/src/smaccm-flight
 make create-sandbox
@@ -39,7 +38,7 @@ echo "************************************************************"
 
 mkdir camkes
 cd camkes
-repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git || true
+repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git -m phase2.xml || true
 repo sync || true
 
 cd apps
