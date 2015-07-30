@@ -429,6 +429,8 @@ bool <port.aadlWriterFnName>(<port:userSendOptConstAadlInputArg()>) {
 		(*<port.globalIndex>)++;
 		return true;
 	} else {
+		 assert(<port.globalMaxDispatchSize> > 0 && 
+		 		*<port.globalIndex> \< <port.globalMaxDispatchSize>);
 		return false;
 	}
 }
