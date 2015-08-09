@@ -22,8 +22,8 @@ echo "************************************************************"
 
 cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
 
-make platform-fmu24/can-server-test-gen
-cd platform-fmu24/can-server-test
+make platform-fmu24/standalone-flight-gen
+cd platform-fmu24/standalone-flight
 if [[ ! -e image ]]
 then
     echo "Failed to build Pixhawk image"
