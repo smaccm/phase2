@@ -40,6 +40,7 @@ mkdir camkes
 cd camkes
 repo init -u https://github.com/smaccm/june-drop-odroid-manifest.git -m phase2.xml || true
 repo sync || true
+repo sync -d || true
 
 cd apps
 echo "RAMSES_PATH=$BASE_DIR/ramses-demo" > RAMSES_PATH.mk
