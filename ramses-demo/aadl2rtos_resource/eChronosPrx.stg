@@ -1,10 +1,6 @@
 delimiters "$", "$"
 import "xmlCommon.stg"
 
-//imported from eChronosComponentC
-incomingPortWriterName(port) ::= "smaccm_$port.qualifiedName$_$port.type.writerFn$"
-incomingActiveThreadDispatchName(dispatcher) ::= "$incomingPortWriterName(dispatcher)$"
-
 
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -41,7 +37,7 @@ writeTrampoline(name, flihName) ::= <<
 >>
 
 writeDispatcherTrampoline(dispatcher) ::= <<
-$writeTrampoline(dispatcher.signalName, incomingActiveThreadDispatchName(dispatcher))$
+$writeTrampoline(dispatcher.signalName, dispatcher.qualifiedName)$
 >>
 
 writeExternalIsrTrampoline(externalIsr) ::= <<
@@ -174,7 +170,6 @@ $writeInterruptEvent(
 	externalIrqEvent.taskName,
 	externalIrqEvent.signalSet)$
 >>
-
 /*
 writeActiveThreadIrqDispatcher(dispatcher) ::= << 
 $if(dispatcher.isIRQ)$
@@ -188,9 +183,6 @@ $endif$
  $threadImpl.dispatchers:writeActiveThreadIrqDispatcher()$
  * 
  */
-
-
-
 writeActiveThreadIrqDispatchers(threadImpl) ::= <<
 $writeInterruptEvent(threadImpl.eChronosInterruptSignal, threadImpl.normalizedName, threadImpl.eChronosDispatchSignal)$
 >>

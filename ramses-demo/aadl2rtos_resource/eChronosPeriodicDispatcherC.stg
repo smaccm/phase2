@@ -1,9 +1,7 @@
 import "CommonPeriodicDispatcherC.stg"
 
 // Copied from "eChronosComponentC.stg"
-incomingPortWriterName(port) ::= "smaccm_<port.qualifiedName>_<port.type.writerFn>"
-outgoingPortWriterName(destPort, srcPort) ::= "<incomingPortWriterName(destPort)>"
-incomingActiveThreadDispatchName(dispatcher) ::= "<incomingPortWriterName(dispatcher)>"
+incomingActiveThreadDispatchName(dispatcher) ::= "<dispatcher.qualifiedName>"
 outgoingActiveThreadDispatchName(dispatcher) ::= "<incomingActiveThreadDispatchName(dispatcher)>"
 
 periodicComponentCBody(model, threadCalendar) ::= <<
