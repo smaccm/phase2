@@ -303,6 +303,21 @@ componentLocalReaderDecl(port) ::= <<
 <componentRemoteWriteFunction(port)>
 >>
 
+componentLocalCallerFunction(connection) ::= <<
+/************************************************************************
+ *  <connection.sourcePort.dispatcherCFileDispatcherFnName>: 
+ * Invoked from user code in the local thread.
+ * 
+ * This function is necessary to mimic a remote call by a passive
+ * thread to a remote active thread, but redirects to the local 
+ * active thread.
+ * 
+ ************************************************************************/
+
+bool <outgoingPortWriterName(connection.destPort,connection.sourcePort)>(const <connection.sourcePort.type.aadlInputType.name> <connection.sourcePort.name>) {
+	return <incomingPortWriterName(connection.destPort)>(<connection.sourcePort.name>);
+}
+>>
 
 componentRemoteCallerFunction(destPort, srcPort) ::= <<
 /************************************************************************
@@ -471,12 +486,8 @@ aadlDispatcherCallPassiveTarget(portDest,structName,portSrc) ::= <<
 aadlDispatcherCallActiveTarget(portDest,structName,portSrc) ::= <<
 // Calling an active dispatch target.
 {
-  // MWW: FIX: Right now there is no 'assert' in eChronos.
-  // So I'm disabling this code.
-  /* bool remoteCallSuccessful = <outgoingPortWriterName(portDest,portSrc)>(<aadlDispatcherWriteActiveArg(structName,portSrc)>);	
-   assert(remoteCallSuccessful);
-   */
-  <outgoingPortWriterName(portDest,portSrc)>(<aadlDispatcherWriteActiveArg(structName,portSrc)>);	
+  bool remoteCallSuccessful = <outgoingPortWriterName(portDest,portSrc)>(<aadlDispatcherWriteActiveArg(structName,portSrc)>);	
+  assert(remoteCallSuccessful);
 }
 >>
 
@@ -545,7 +556,7 @@ void <activeThreadInternalDispatcherName(dispatcher)>(<if(dispatcher.hasData)><d
 	// The dispatcher function args are from the dispatch contract.
 
 aadlDispatcherFunctionPrototype(dispatcher) ::=  <<
-static void <activeThreadInternalDispatcherName(dispatcher)>(<if(dispatcher.hasData)><dispatcher.type.aadlInputType.name> <dispatcher.name><endif>); 
+void <activeThreadInternalDispatcherName(dispatcher)>(<if(dispatcher.hasData)><dispatcher.type.aadlInputType.name> <dispatcher.name><endif>); 
 
 >>
 
@@ -620,7 +631,9 @@ if (<dispatcher.dispatchOccurredVar>) {
 irqDispatcher(dispatcher) ::= <<
 if (<dispatcher.dispatchOccurredVar>) {
 	<dispatcher.dispatchOccurredVar> = false;
-	<activeThreadInternalDispatcherName(dispatcher)>();
+	// dummy input to match the expectations of Tower.
+	int64_t _dummy;
+	<activeThreadInternalDispatcherName(dispatcher)>(&dummy);
 }
 
 >>
@@ -753,7 +766,7 @@ componentCFileDecls(threadImpl) ::= <<
 <threadImpl.outputDataPortList:componentRemoteWriterDecl()>
 
 <if(threadImpl.isActive)><\\>
-<threadImpl.localActiveThreadConnectionFrontier:osSpecificComponentLocalCallerFunction()>
+<threadImpl.localActiveThreadConnectionFrontier:componentLocalCallerFunction()>
 <threadImpl.dispatchers:aadlDispatcherFunction()>
 <threadImpl.passiveDispatcherRegion:aadlDispatcherFunction()> 
 <if(threadImpl.isExternal)><\\>

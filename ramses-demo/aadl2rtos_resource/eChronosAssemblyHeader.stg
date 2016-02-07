@@ -41,8 +41,7 @@ bool <incomingPortWriterName(port)>(<port.type.camkesInputType.name> arg);
 */
 
 writerDecl(port) ::= <<
-bool <incomingPortWriterName(port)><if(port.hasData)>(const <port.type.camkesInputType.name> arg);<else>();<endif> 
-
+bool <incomingActiveThreadDispatchName(port)><if(port.hasData)>(const <port.type.camkesInputType.name> arg);<else>();<endif> 
 >>
 
 /*
@@ -64,6 +63,7 @@ activeThreadDecls(threadImpl) ::= <<
 <threadImpl.periodicDispatchers:periodicDispatcherDecl()> */
 
 passiveThreadDecls(threadImpl) ::= <<
+<threadImpl.inputDataPortList:writerDecl()>
 <threadImpl.dispatchers:userEntrypointCallerDecl()>
 >>
 
