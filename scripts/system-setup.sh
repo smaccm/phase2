@@ -13,18 +13,6 @@ then
     export PATH=`cat PATH`
 fi
 
-
-echo "************************************************************"
-echo "Install remaining cabal packages"
-echo "************************************************************"
-
-cabal update
-cabal install MissingH
-cabal install data-ordlist
-cabal install split
-cabal install mtl
-
-
 echo "************************************************************"
 echo "Install pip software"
 echo "************************************************************"
