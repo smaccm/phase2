@@ -11,8 +11,13 @@ cache:
 addons:
   apt:
     sources:
+      - hvr-ghc
       - ubuntu-toolchain-r-test
     packages:
+      - ghc-7.8.4
+      - cabal-install-1.22
+      - alex-3.1.4
+      - happy-1.19.5
       - lib32ncurses5
       - libev-dev
       - gcc-4.8
@@ -28,6 +33,8 @@ addons:
       - python2.7-dev
 
 before_install:
+  # Add paths for Haskell tools
+  - export PATH="/opt/ghc/7.8.4/bin:/opt/cabal/1.22/bin:/opt/alex/3.1.4/bin:/opt/happy/1.19.5/bin:$PATH"
   # Download and unpack the stack executable
   - mkdir -p $HOME/.local/bin
   - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
@@ -42,6 +49,10 @@ before_install:
   - export PATH="$PWD:$(echo $HOME/.gcc-arm-embedded/*/bin):$PATH"
   - gcc --version
   - arm-none-eabi-gcc --version
+  - ghc --version
+  - cabal --version
+  - alex --version
+  - happy --version
   - export SMACCM_BRANCH=$TRAVIS_BRANCH
 
 script:
