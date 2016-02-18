@@ -40,6 +40,8 @@ before_install:
   - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
   - export PATH="$HOME/.local/bin:$PATH"
   - stack --version
+  # Set up GHC 7.10.3 for stack builds
+  - stack --resolver=lts-5.3 setup
   # Download and unpack the ARM embedded toolchain
   - if [ ! -d $HOME/.gcc-arm-embedded/*/bin ];
     then
