@@ -27,9 +27,10 @@ echo "************************************************************"
 echo "Configure smaccmpilot code"
 echo "************************************************************"
 
+git checkout ${SMACCM_BRANCH:=master}
 git submodule update --init
 cd smaccmpilot-stm32f4/src/smaccm-flight
-make create-sandbox
+make
 cd $BASE_DIR
 
 echo "************************************************************"

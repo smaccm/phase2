@@ -71,6 +71,12 @@ sudo apt-get -y --force-yes install \
     uboot-mkimage \
     python2.7-dev
 
+echo "************************************************************"
+echo "Install stack"
+echo "************************************************************"
+mkdir -p $PWD/.local/bin
+curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $PWD/.local/bin '*/stack'
+echo "$PWD/.local/bin:$PATH" >PATH
 
 echo "************************************************************"
 echo "Install gcc-arm-embedded"
