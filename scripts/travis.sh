@@ -26,10 +26,10 @@ echo "************************************************************"
 rm -rf /var/lib/apt/lists/*
 
 sudo apt-get update
-sudo apt-get -y install python-software-properties software-properties-common
-sudo add-apt-repository -y ppa:webupd8team/java # java
-sudo add-apt-repository -y ppa:hvr/ghc          # ghc, cabal, happy, alex
-sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # gcc-4.8
+sudo apt-get -y --force-yes install python-software-properties software-properties-common
+sudo add-apt-repository -y --force-yes ppa:webupd8team/java # java
+sudo add-apt-repository -y --force-yes ppa:hvr/ghc          # ghc, cabal, happy, alex
+sudo add-apt-repository -y --force-yes ppa:ubuntu-toolchain-r/test # gcc-4.8
 sudo apt-get update
 
 
@@ -37,7 +37,7 @@ echo "************************************************************"
 echo "Install GHC, Cabal, Alex, Happy"
 echo "************************************************************"
 
-sudo apt-get install -y ghc-7.8.4 cabal-install-1.22 alex-3.1.4 happy-1.19.5
+sudo apt-get install -y --force-yes ghc-7.8.4 cabal-install-1.22 alex-3.1.4 happy-1.19.5
 
 
 echo "************************************************************"
@@ -47,7 +47,7 @@ echo "************************************************************"
 # we have to do this to say yes to the java 8 license agreement
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-sudo apt-get -y install oracle-java8-installer
+sudo apt-get -y --force-yes install oracle-java8-installer
 
 
 echo "************************************************************"
