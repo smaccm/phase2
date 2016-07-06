@@ -68,7 +68,7 @@ sudo apt-get -y --force-yes install \
     gcc-arm-linux-gnueabi \
     python-pip \
     libxml2-utils \
-    uboot-mkimage \
+    u-boot-tools \
     python2.7-dev
 
 echo "************************************************************"
