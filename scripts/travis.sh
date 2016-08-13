@@ -27,9 +27,9 @@ rm -rf /var/lib/apt/lists/*
 
 sudo apt-get update
 sudo apt-get -y --force-yes install python-software-properties software-properties-common
-sudo add-apt-repository -y --force-yes ppa:webupd8team/java # java
-sudo add-apt-repository -y --force-yes ppa:hvr/ghc          # ghc, cabal, happy, alex
-sudo add-apt-repository -y --force-yes ppa:ubuntu-toolchain-r/test # gcc-4.8
+sudo add-apt-repository -y ppa:webupd8team/java # java
+sudo add-apt-repository -y ppa:hvr/ghc          # ghc, cabal, happy, alex
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # gcc-4.8
 sudo apt-get update
 
 
