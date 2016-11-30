@@ -26,10 +26,19 @@ make platform-fmu24/standalone-flight-gen
 cd platform-fmu24/standalone-flight
 if [[ ! -e image ]]
 then
-    echo "Failed to build Pixhawk image"
+    echo "Failed to build Pixhawk FreeRTOS image"
     exit 1
 fi
 mv image $BASE_DIR/pixhawk-image
+cd ../..
+
+make platform-fmu24/standalone_flight_echronos_gen
+cd platform-fmu24/standalone_flight_echronos
+if [[ ! -e image ]]
+then
+    echo "Failed to build Pixhawk eChronos image"
+    exit 1
+fi
 cd ../..
 
 make smaccmpilot-odroid
